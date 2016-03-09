@@ -16,6 +16,10 @@
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
+<!-- FontAwesome icon stylesheet -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
 <!-- Custom CSS -->
 <link rel="stylesheet" href="style/custom.css">
 
