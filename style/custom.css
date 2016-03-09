@@ -21,3 +21,8 @@ body {
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
 	background-color: #fff;
 }
+
+.login-menu {
+	width: 250px;
+	padding: 10px;
+}
