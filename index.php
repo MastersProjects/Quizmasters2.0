@@ -42,9 +42,10 @@
 											placeholder="Username">
 									</div>
 									<div class="form-group">
-										<label for="inputPassword">Password</label> <input
+										<label for="inputPassword">Passwort</label><input
 											type="password" class="form-control"
 											id="inputPassword" placeholder="Password">
+											<a href="#"> Passwort vergessen?</a> 
 									</div>
 									<button type="submit" class="btn btn-default">Submit</button>
 								</form>
