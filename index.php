@@ -39,15 +39,15 @@
 									<div class="form-group">
 										<label for="inputUsername">Username</label> <input
 											type="text" class="form-control" id="inputUsername"
-											placeholder="Username">
+											placeholder="Username" required>
 									</div>
 									<div class="form-group">
 										<label for="inputPassword">Passwort</label><input
 											type="password" class="form-control"
-											id="inputPassword" placeholder="Password">
+											id="inputPassword" placeholder="Password" required>
 											<a href="#"> Passwort vergessen?</a> 
 									</div>
-									<button type="submit" class="btn btn-default">Submit</button>
+									<button type="submit" class="btn btn-default">Anmelden</button>
 								</form>
 							</li>
 						</ul></li>
