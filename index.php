@@ -27,8 +27,8 @@
 						</ul></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign
-							Up</a></li>
+					<li><a data-toggle="modal" href="#myModal"><span
+							class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#"><span
 							class="glyphicon glyphicon-log-in"></span> Login<span
@@ -37,15 +37,15 @@
 							<li>
 								<form method="post" action="index.php">
 									<div class="form-group">
-										<label for="inputUsername">Username</label> <input
-											type="text" class="form-control" id="inputUsername"
+										<label for="inputUsername">Username</label> <input type="text"
+											class="form-control" id="inputUsername"
 											placeholder="Username" required>
 									</div>
 									<div class="form-group">
 										<label for="inputPassword">Passwort</label><input
-											type="password" class="form-control"
-											id="inputPassword" placeholder="Password" required>
-											<a href="#"> Passwort vergessen?</a> 
+											type="password" class="form-control" id="inputPassword"
+											placeholder="Password" required> <a href="#"> Passwort
+											vergessen?</a>
 									</div>
 									<button type="submit" class="btn btn-default">Anmelden</button>
 								</form>
@@ -56,6 +56,57 @@
 		</div>
 	</nav>
 	<div class="container">
+		<div class="modal" id="myModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">
+							<i class="fa fa-times"></i>
+						</button>
+						<h4 class="modal-title">Login</h4>
+					</div>
+					<div class="container"></div>
+					<form method="post" action="index.php">
+						<div class="modal-body">
+							<div class="form-group">
+								<label for="inputUsername">Username</label> <input type="text"
+									class="form-control" id="inputUsername" placeholder="Username"
+									required>
+							</div>
+							<div class="form-group">
+								<label for="inputPassword">Passwort</label><input
+									type="password" class="form-control" id="inputPassword"
+									placeholder="Password" required> <a href="#"> Passwort
+									vergessen?</a>
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<a href="#" data-dismiss="modal" class="btn">Close</a>
+							<button type="submit" class="btn btn-default">Anmelden</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="modal" id="myModal2" data-backdrop="static">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">×</button>
+						<h4 class="modal-title">Second Modal title</h4>
+					</div>
+					<div class="container"></div>
+					<div class="modal-body">Content for the dialog / modal goes here.</div>
+					<div class="modal-footer">
+						<a href="#" data-dismiss="modal" class="btn">Close</a> <a href="#"
+							class="btn btn-primary">Save changes</a>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="col-md-10">
 			<div class="row">
 				<div class="col-md-4">
