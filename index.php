@@ -27,11 +27,9 @@
 						</ul></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a data-toggle="modal" href="#myModal"><span
-							class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+					<li><a data-toggle="modal" href="#myModal"><i class="fa fa-user-plus"></i> Sign Up</a></li>
 					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#"><span
-							class="glyphicon glyphicon-log-in"></span> Login<span
+						data-toggle="dropdown" href="#"><i class="fa fa-sign-in"></i> Login<span
 							class="caret"></span></a>
 						<ul class="dropdown-menu login-menu">
 							<li>
