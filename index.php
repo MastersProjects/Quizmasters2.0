@@ -4,8 +4,6 @@
 		<?php include_once 'includes/head.php'; ?>
 	</head>
 <body>
-
-	<div class="container">
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
@@ -73,6 +71,5 @@
 				<img src="img/ad.jpg" alt="Werbung" class="img-responsive">
 			</div>
 		</div>
-	</div>
 </body>
 </html>
