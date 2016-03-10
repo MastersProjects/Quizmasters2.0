@@ -1,5 +1,5 @@
 <?php
-$serverName = "WIN-6I7SLMJ1GDI\SQLSERVER"; //serverName\instanceName
+$serverName = "PERENZIN2\SQLSERVER"; //serverName\instanceName
 
 // Since UID and PWD are not specified in the $connectionInfo array,
 // The connection will be attempted using Windows Authentication.
