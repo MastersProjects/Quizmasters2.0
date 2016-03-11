@@ -1,7 +1,7 @@
 <?php
 require_once 'Table_ANSWER.php';
 require_once 'Table_CATEGORY.php';
-require_once 'Table_DIFFICUTY.php';
+require_once 'Table_DIFFICULTY.php';
 require_once 'Table_GAMEMODE.php';
 require_once 'Table_QUESTION.php';
 require_once 'Table_SOLVED_QUIZ.php';
@@ -15,6 +15,8 @@ require_once 'Table_USER.php';
  */
 class Database {
 	private $connection;
+	private $connectionInfo = array();
+	private $serverName;
 	private static $instance = null;
 	private $TABLE_ANSWER;
 	private $TABLE_CATEGORY;
@@ -54,35 +56,45 @@ class Database {
 	
 	// Set all the information for the connection to the database
 	public function setConnectionInfo($serverName, $connectionInfo) {
-		$this->connection = new sqlsrv_connect ( $serverName, $connectionInfo);
+		$this->serverName = $serverName;
+		$this->connectionInfo = $connectionInfo;
+	}
+	
+	public function openConn(){
+		$this->connection = sqlsrv_connect( $this->serverName, $this->connectionInfo);
 		
 		if( !($this->connection) ) {
 			echo "Connection could not be established.<br />";
 			die( print_r( sqlsrv_errors(), true));
 		}
-	}
 	
-	// Returns the mysqli Object with the connection
-	public function getConnection() {
 		return $this->connection;
 	}
 	
-	// Controller for setUser, the querry is executet in Table_User
-	//EXAMPLE
-	public function insertUser($facebook_Id, $lastname, $firstname, $email, $gender, $link, $joinDate) {
-		if ($this->TABLE_USER->checkDuplicateUser ( $facebook_Id ) == false) {
-			// Create boolean for gender
-			if ($gender == "male") {
-				$gender = 1;
-			} else {
-				$gender = 0;
-			}
-			
-			// Data is sent to Table_User for execute the query
-			$this->TABLE_USER->insertUser ( $facebook_Id, $firstname, $lastname, $email, $gender, $link, $joinDate );
-			header ( 'Location: thanks.php' );
+	public function closeConn(){
+		sqlsrv_close($this->connection);
+	}
+	
+	//Login function
+	public function login($username, $password) {
+		$result = $this->TABLE_USER->getUser($username);
+ 		$result = sqlsrv_fetch_array ($result);
+
+ 		echo $result['Password'];
+ 		echo "<br>";
+ 		echo md5($password);
+ 		
+ 		$this->closeConn();
+		if($result['Password'] == md5($password)){
+			echo "true";
+			return true;
 		} else {
- 			header ( 'Location: alreadyJoined.php' );
+			echo "false";
+			return false;
 		}
+	}
+	
+	public function getServerName(){
+		return $this->serverName;
 	}
 }
