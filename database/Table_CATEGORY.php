@@ -16,7 +16,7 @@ class Table_CATEGORY {
 // 		$connection->query ( $query );
 // 	}
 	
-	public function getCategories() {
+	public function getAllCategory() {
 		$query = "SELECT * FROM [dbo].[CATEGORY]";
 		$connection = Database::getInstance ()->getConnection ();
 		$connection->query ( $query );

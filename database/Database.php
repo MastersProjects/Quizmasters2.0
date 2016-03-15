@@ -100,14 +100,14 @@ class Database {
 	}
 	
 	//Get Categories function
-	public function getCategories(){
-		$result = $this->TABLE_CATEGORY->getCategories();
+	public function getAllCategory(){
+		$result = $this->TABLE_CATEGORY->getAllCategory();
 		$result = sqlsrv_fetch_array ($result);
 		
 		$this->closeConn();
 		
-		echo $result['ID_Category'];
-		echo $result['Category'];
+		var_dump($result['ID_Category']);
+		var_dump($result['Category']);
 	}
 	
 	public function getServerName(){
