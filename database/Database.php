@@ -80,10 +80,6 @@ class Database {
 	public function login($username, $password) {
 		$result = $this->TABLE_USER->getUser($this->test_input($username));
  		$result = sqlsrv_fetch_array ($result);
-
- 		echo $result['Password'];
- 		echo "<br>";
- 		echo md5($password);
  		
  		$this->closeConn();
 		if($result['Password'] == md5($password)){

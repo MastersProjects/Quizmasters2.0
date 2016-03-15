@@ -70,7 +70,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="inputUsername">Username</label> <input type="text"
-										class="form-control" id="inputUsername" placeholder="Username"
+										class="form-control" id="inputUsername" name="username" placeholder="Username"
 										required>
 								</div>
 							</div>
@@ -80,14 +80,14 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="inputFirstname">Vorname</label> <input type="text"
-										class="form-control" id="inputFirstname" placeholder="Vorname"
+										class="form-control" id="inputFirstname" name="surname" placeholder="Vorname"
 										required>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="inputName">Nachname</label> <input type="text"
-										class="form-control" id="inputName" placeholder="Nachname"
+										class="form-control" id="inputName" name="name" placeholder="Nachname"
 										required>
 								</div>
 							</div>
@@ -96,7 +96,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="inputEmail">Email</label> <input type="email"
-										class="form-control" id="inputEmail" placeholder="Email"
+										class="form-control" id="inputEmail" name="email" placeholder="Email"
 										required>
 								</div>
 							</div>
@@ -105,14 +105,14 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="inputPassword">Passwort</label><input
-										type="password" class="form-control" id="inputPassword"
+										type="password" class="form-control" name="passwordOne" id="inputPassword"
 										placeholder="Password" required>
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="inputPassword">Passwort best&auml;tigen</label><input
-										type="password" class="form-control" id="inputPassword"
+										type="password" class="form-control" name="passwordTow" id="inputPassword"
 										placeholder="Password" required>
 								</div>
 							</div>
