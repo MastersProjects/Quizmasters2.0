@@ -4,5 +4,7 @@ include_once 'database/Database.php';
 
 $database = Database::getInstance();
 
-$result = $database->login('zperee', '1234');
+// $result = $database->login('zperee', '1234');
+
+$result = $database->getAllCategory('zperee', '1234');
 
