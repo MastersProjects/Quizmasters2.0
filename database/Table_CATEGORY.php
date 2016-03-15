@@ -9,9 +9,21 @@ require_once 'Database.php';
  */
 class Table_CATEGORY {
 
-	public function fuctionName() {
-		$query = "";
+	//TEMPLATE
+// 	public function fuctionName() {
+// 		$query = "";
+// 		$connection = Database::getInstance ()->getConnection ();
+// 		$connection->query ( $query );
+// 	}
+	
+	public function getCategories() {
+		$query = "SELECT * FROM [dbo].[CATEGORY]";
 		$connection = Database::getInstance ()->getConnection ();
 		$connection->query ( $query );
+		
+		$stmt = sqlsrv_query ( $connection, $query);
+		
+		return($stmt);
 	}
+	
 }

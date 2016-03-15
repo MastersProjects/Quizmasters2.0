@@ -99,6 +99,17 @@ class Database {
 		$this->login($username, $password);
 	}
 	
+	//Get Categories function
+	public function getCategories(){
+		$result = $this->TABLE_CATEGORY->getCategories();
+		$result = sqlsrv_fetch_array ($result);
+		
+		$this->closeConn();
+		
+		echo $result['ID_Category'];
+		echo $result['Category'];
+	}
+	
 	public function getServerName(){
 		return $this->serverName;
 	}

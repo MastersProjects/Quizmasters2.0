@@ -9,5 +9,6 @@
 
 class Quiz {
 	private $category;
+	private $categoryID;
 	private $questions = array();
 }
