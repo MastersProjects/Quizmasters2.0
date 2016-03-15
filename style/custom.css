@@ -45,6 +45,20 @@ body {
 	margin-top: -20px;
 }
 
+/* Panel */
+
 .panel {
 	margin-top: 3%;
+}
+
+.panel-heading {
+	background-color: #2071DA !important;
+}
+
+.panel-title {
+	color: #fff;
+}
+
+.panel-body {
+	background-color: #F4F0EA;
 }

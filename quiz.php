@@ -79,7 +79,7 @@ if($_POST){
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-md-6">
-								<input type="radio" id="mc" name="Zahlmethode" value="Mastercard"> Salami
+								<label><input type="radio" id="mc" name="Zahlmethode" value="Mastercard"> Salami</label>
 							</div>
 							<div class="col-md-6">
 								<input type="radio" id="mc" name="Zahlmethode" value="Mastercard"> Salami

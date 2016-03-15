@@ -8,9 +8,6 @@ require_once 'Database.php';
  * Quizmasters 2.0 2016
  */
 class Table_USER {
-	/**
-	 * @todo Username with the variable $username
-	 */
 	//Function to get a user from the database
 	public function getUser($username) {
 		$query = "SELECT * FROM [QUIZMASTERS].[dbo].[USER] WHERE [username] = ? AND [active] = '1'";
