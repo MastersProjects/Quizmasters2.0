@@ -1,11 +1,20 @@
+<?php
+include_once 'database/Database.php';
+
+if($_POST){
+	if((isset($_POST['userLogin'])) && (isset($_POST['passwordLogin']))){
+		Database::getInstance()->login($_POST['userLogin'], $_POST['passwordLogin']);
+	}
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
-	<?php include_once 'includes/head.php'; ?>
+<?php include_once 'includes/head.php'; ?>
 </head>
 <body>
-<?php include_once 'resources/navigation.php'; ?>
-		<div class="col-md-10">
+	<?php include_once 'resources/navigation.php'; ?>
+	<div class="col-md-10">
 		<div class="row">
 			<div class="col-md-4">
 				<img class="img-responsive" alt="Test" src="img/placeholder.jpg">
@@ -32,7 +41,7 @@
 				</p>
 			</div>
 		</div>
-		<hr/>
+		<hr />
 	</div>
 	<div class="col-md-2">
 		<img src="img/ad.jpg" alt="Werbung" class="img-responsive">

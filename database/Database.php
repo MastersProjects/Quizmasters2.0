@@ -6,7 +6,7 @@ require_once 'Table_GAMEMODE.php';
 require_once 'Table_QUESTION.php';
 require_once 'Table_SOLVED_QUIZ.php';
 require_once 'Table_USER.php';
-require_once '../model/User.php';
+require_once 'model/User.php';
 
 /**
  * This is the controller between the the Database and the modell classes.
