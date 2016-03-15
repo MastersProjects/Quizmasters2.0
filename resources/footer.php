@@ -1,4 +1,4 @@
-<section id="footer">
+<section id="footer" class="navbar-bottom">
 	<div class="container text-center">
 		<div class="col-md-4">
 			<h3>About</h3>
