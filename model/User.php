@@ -11,5 +11,5 @@ Class User{
 	private $firstname;
 	private $lastname;
 	private $email;
-	private $points;
+	private $points = array();
 }

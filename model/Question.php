@@ -8,5 +8,6 @@
  */
 Class Question{
 	private $category;
-	private $answers;
+	private $answers = array();
+	private $points;
 }
