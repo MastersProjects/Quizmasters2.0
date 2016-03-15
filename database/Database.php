@@ -45,15 +45,6 @@ class Database {
 		return self::$instance;
 	}
 	
-	//Function to test the input;
-	function test_input($data) {
-		$data = trim($data);
-		$data = stripslashes($data);
-		$data = htmlspecialchars($data);
-		$data = addslashes($data);
-		return $data;
-	}
-	
 	// Set all the information for the connection to the database
 	public function setConnectionInfo($serverName, $connectionInfo) {
 		$this->serverName = $serverName;
@@ -71,13 +62,22 @@ class Database {
 		return $this->connection;
 	}
 	
+	//Function to test the input
+	private function test_input($data) {
+		$data = trim($data);
+		$data = stripslashes($data);
+		$data = htmlspecialchars($data);
+		$data = addslashes($data);
+		return $data;
+	}
+	
 	public function closeConn(){
 		sqlsrv_close($this->connection);
 	}
 	
 	//Login function
 	public function login($username, $password) {
-		$result = $this->TABLE_USER->getUser($username);
+		$result = $this->TABLE_USER->getUser($this->test_input($username));
  		$result = sqlsrv_fetch_array ($result);
 
  		echo $result['Password'];
@@ -92,6 +92,12 @@ class Database {
 			echo "false";
 			return false;
 		}
+	}
+	
+	//Register function
+	public function register($username, $firstname, $lastname, $email, $password) {
+		$this->TABLE_USER->register(test_input($username), test_input($firstname), test_input($lastname), test_input($email), md5(test_input($password)));
+		$this->closeConn();
 	}
 	
 	public function getServerName(){
