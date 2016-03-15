@@ -36,3 +36,15 @@ body {
 .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
     color: #fff;
 }
+
+.navbar-fixed-top {
+	border-bottom: none;
+}
+
+#myCarousel {
+	margin-top: -20px;
+}
+
+.panel {
+	margin-top: 3%;
+}

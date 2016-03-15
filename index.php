@@ -52,7 +52,7 @@ if($_POST){
 			<img src="img/ad.jpg" alt="Werbung" class="img-responsive">
 		</div>
 	</div>
-	<hr/>
+	<hr />
 	<?php include_once 'resources/footer.php';?>
 </body>
 </html>
