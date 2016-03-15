@@ -6,5 +6,5 @@ $database = Database::getInstance();
 
 // $result = $database->login('zperee', '1234');
 
-$result = $database->getAllCategory('zperee', '1234');
+$result = $database->getAllCategories();
 
