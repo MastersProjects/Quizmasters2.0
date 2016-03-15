@@ -12,4 +12,20 @@ Class User{
 	private $lastname;
 	private $email;
 	private $points = array();
+	
+	public function __construct($username, $firstname, $lastname, $email){
+		$this->username = $username;
+		$this->firstname = $firstname;
+		$this->lastname = $lastname;
+		$this->email = $email;
+	}
+	
+	public function addPoints($point){
+		array_push($this->points, $point);
+	}
+	
+	public function getPoints(){
+		return $this->points;
+	}
+	
 }

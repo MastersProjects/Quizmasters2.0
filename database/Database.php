@@ -6,6 +6,7 @@ require_once 'Table_GAMEMODE.php';
 require_once 'Table_QUESTION.php';
 require_once 'Table_SOLVED_QUIZ.php';
 require_once 'Table_USER.php';
+require_once '../model/User.php';
 
 /**
  * This is the controller between the the Database and the modell classes.
@@ -86,18 +87,20 @@ class Database {
  		
  		$this->closeConn();
 		if($result['Password'] == md5($password)){
-			echo "true";
+			$user = new User($result['Username'], $result['Firstname'], $result['Lastname'], $result['Email']);
+			$_SESSION['login'] = true;
+			$_SESSION['user'] = $user;
 			return true;
 		} else {
-			echo "false";
 			return false;
 		}
 	}
 	
 	//Register function
 	public function register($username, $firstname, $lastname, $email, $password) {
-		$this->TABLE_USER->register(test_input($username), test_input($firstname), test_input($lastname), test_input($email), md5(test_input($password)));
+		$this->TABLE_USER->register($this->test_input($username), $this->test_input($firstname), $this->test_input($lastname), $this->test_input($email), md5($this->test_input($password)));
 		$this->closeConn();
+		$this->login($username, $password);
 	}
 	
 	public function getServerName(){
