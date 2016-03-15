@@ -13,14 +13,14 @@ class Table_CATEGORY {
 // 	public function fuctionName() {
 // 		$query = "";
 // 		$connection = Database::getInstance ()->getConnection ();
-// 		$connection->query ( $query );
+// 		$stmt = sqlsrv_query ( $connection, $query);
+
+//		return($stmt);
 // 	}
 	
-	public function getAllCategory() {
+	public function getAllCategories() {
 		$query = "SELECT * FROM [dbo].[CATEGORY]";
-		$connection = Database::getInstance ()->getConnection ();
-		$connection->query ( $query );
-		
+		$connection = Database::getInstance ()->openConn ();		
 		$stmt = sqlsrv_query ( $connection, $query);
 		
 		return($stmt);
