@@ -1,7 +1,7 @@
 <?php
 include_once 'database/database_infos.php';
 include_once 'database/Database.php';
-
+session_start();
 if($_POST){
 	if((isset($_POST['userLogin'])) && (isset($_POST['passwordLogin']))){
 		$result = Database::getInstance()->login($_POST['userLogin'], $_POST['passwordLogin']);

@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
@@ -8,20 +7,33 @@
 				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">QuizMasters 2.0</a>
+			<a class="navbar-brand" href="index.php">QuizMasters 2.0</a>
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Quiz</a></li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">Quiz<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+						<?php $categories = Database::getInstance()->getAllCategories();
+							foreach ($categories as $category){
+								//ID = ID in Datenbank
+								?><li><a href="quiz.php?id=<?php echo $category['ID_Category']?>"> <?php echo $category['Category']?></a></li>
+						<?php }?>
+					</ul></li>
+				<?php if (isset($_SESSION['login']) and ($_SESSION['login'] == true)){?>
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#">Profil<span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu">
-						<li><a href="#">..Benutzername..</a></li>
+						<li><a href="#">..Username..</a></li>
 						<li><a href="#">Statistik</a></li>
 						<li><a href="#">Abzeichen</a></li>
 					</ul></li>
+				<?php }?>
+				<li><a href="#">Rangliste</a></li>
 			</ul>
+			<?php if (!(isset($_SESSION['login'])) or ($_SESSION['login'] == false)){ ?>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a data-toggle="modal" href="#myModal"><i
 						class="fa fa-user-plus"></i> Sign Up</a></li>
@@ -47,6 +59,7 @@
 						</li>
 					</ul></li>
 			</ul>
+			<?php }?>
 		</div>
 	</div>
 </nav>

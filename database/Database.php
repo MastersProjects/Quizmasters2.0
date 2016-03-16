@@ -88,13 +88,14 @@ class Database {
 			$_SESSION['user'] = $user;
 			return true;
 		} else {
+			$_SESSION['login'] = false;
 			return false;
 		}
 	}
 	
 	//Register function
-	public function register($username, $firstname, $lastname, $email, $password) {
-		$this->TABLE_USER->register($this->test_input($username), $this->test_input($firstname), $this->test_input($lastname), $this->test_input($email), md5($this->test_input($password)));
+	public function registration($username, $firstname, $lastname, $email, $password) {
+		$this->TABLE_USER->registration($this->test_input($username), $this->test_input($firstname), $this->test_input($lastname), $this->test_input($email), md5($this->test_input($password)));
 		$this->closeConn();
 		$this->login($username, $password);
 	}
@@ -102,14 +103,50 @@ class Database {
 	//Get Categories function
 	public function getAllCategories(){
 		$result = $this->TABLE_CATEGORY->getAllCategories();
-		$result = sqlsrv_fetch_array ($result);
+
+		$categories = array();
+		while ($category = sqlsrv_fetch_array($result)){
+			array_push($categories, $category);
+		}
+		$this->closeConn();
+		
+		return $categories;
+	}
+	
+	//Create Quiz
+	public function createQuiz($id_category) {
+		$quiz = array();
+		//Get 10 random questions from category
+		$result = $this->TABLE_QUESTION->getQuestions($id_category);
+		
+		$questions = array();
+		$question_id = array();
+		//Save every question and question_id into array
+		//question_id array is needed for params for answer
+		while ($question = sqlsrv_fetch_array($result)){
+			array_push($questions, $question);
+			array_push($question_id, $question['ID_Question']);
+		}
+		//Add questions to quiz
+		array_push($quiz, $questions);
 		
 		$this->closeConn();
 		
-		var_dump($result['ID_Category']);
-		var_dump($result['Category']);
-	}
+		//Get all answers for the 10 questions
+		$result = $this->TABLE_ANSWER->getAnswers($question_id);
 	
+		$answers = array();
+		//Save all answers
+		while ($answer = sqlsrv_fetch_array($result)){
+			array_push($answers, $answer);
+		}
+		//Add answers to quiz
+		array_push($quiz, $answers);
+		
+		$this->closeConn();
+		return $quiz;
+	}
+		
 	public function getServerName(){
 		return $this->serverName;
 	}

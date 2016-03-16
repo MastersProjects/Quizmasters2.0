@@ -9,17 +9,8 @@ require_once 'Database.php';
  */
 class Table_CATEGORY {
 
-	//TEMPLATE
-// 	public function fuctionName() {
-// 		$query = "";
-// 		$connection = Database::getInstance ()->getConnection ();
-// 		$stmt = sqlsrv_query ( $connection, $query);
-
-//		return($stmt);
-// 	}
-	
 	public function getAllCategories() {
-		$query = "SELECT * FROM [dbo].[CATEGORY]";
+		$query = "SELECT * FROM [QUIZMASTERS].[dbo].[CATEGORY] WHERE [Active] = '1'";
 		$connection = Database::getInstance ()->openConn ();		
 		$stmt = sqlsrv_query ( $connection, $query);
 		

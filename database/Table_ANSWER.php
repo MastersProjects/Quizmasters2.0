@@ -9,9 +9,18 @@ require_once 'Database.php';
  */
 class Table_ANSWER {
 
-	public function fuctionName() {
-		$query = "";
-		$connection = Database::getInstance ()->getConnection ();
-		$connection->query ( $query );
+public function getAnswers($question_id) {
+	$query = "SELECT TOP 1000 [ID_Answer]
+      		,[Answer]
+     		,[Correct]
+      		,[Question_ID]
+  			FROM [QUIZMASTERS].[dbo].[ANSWER]
+  			WHERE Question_ID = ? or Question_ID = ? or Question_ID = ? or Question_ID = ? or Question_ID = ?
+			or Question_ID = ? or Question_ID = ? or Question_ID = ? or Question_ID = ? or Question_ID = ?"; 
+	
+	$connection = Database::getInstance ()->openConn();
+	$stmt = sqlsrv_query( $connection, $query, $question_id);
+	
+	return($stmt);
 	}
 }

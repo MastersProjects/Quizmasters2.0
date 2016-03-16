@@ -9,9 +9,22 @@ require_once 'Database.php';
  */
 class Table_QUESTION {
 
-	public function fuctionName() {
-		$query = "";
-		$connection = Database::getInstance ()->getConnection ();
-		$connection->query ( $query );
+public function getQuestions($id_category) {
+	$params = array($id_category, '1');
+	
+	$query = "SELECT TOP 10 [ID_Question]
+      	,[Question]
+      	,[Difficulty_ID]
+      	,[Category_ID]
+      	,[Active]
+  		FROM [QUIZMASTERS].[dbo].[QUESTION]
+  		WHERE [Category_ID] = ? AND [Active] = ?
+  		ORDER BY NEWID()";
+		
+		$connection = Database::getInstance ()->openConn();
+		$stmt = sqlsrv_query( $connection, $query, $params);
+		
+		return($stmt);
 	}
+	
 }

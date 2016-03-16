@@ -1,15 +1,6 @@
 <?php
 include_once 'database/database_infos.php';
 include_once 'database/Database.php';
-
-if($_POST){
-	if((isset($_POST['userLogin'])) && (isset($_POST['passwordLogin']))){
-		$result = Database::getInstance()->login($_POST['userLogin'], $_POST['passwordLogin']);
-	}
-	if((isset($_POST['username'])) && (isset($_POST['surname'])) && (isset($_POST['name'])) && (isset($_POST['email'])) && (isset($_POST['passwordOne']))){
-		$result = Database::getInstance()->registration($_POST['username'], $_POST['surname'], $_POST['name'], $_POST['email'], $_POST['passwordOne']);
-	}
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -48,57 +39,34 @@ if($_POST){
 	</div>
 	<div class="container">
 		<div class="row">
+	<?php
+	
+$quiz = Database::getInstance ()->createQuiz ( $_GET ['id'] );
+	foreach ( $quiz [0] as $question ) {
+		?>
 			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">Was isst Phong am liebsten auf seiner Pizza?</h3>
+						<h3 class="panel-title"><?php echo utf8_encode($question['Question'])?></h3>
 					</div>
+		<?php foreach ($quiz[1] as $answer){?>
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-md-6">
-								<input type="radio" id="mc" name="Zahlmethode" value="Mastercard"> Salami
-							</div>
-							<div class="col-md-6">
-								<input type="radio" id="mc" name="Zahlmethode" value="Mastercard"> Salami
-							</div>
-							<div class="col-md-6">
-								<input type="radio" id="mc" name="Zahlmethode" value="Mastercard"> Salami
-							</div>
-							<div class="col-md-6">
-								<input type="radio" id="mc" name="Zahlmethode" value="Mastercard"> Salami
+								<input type="radio" id="" name="" value=""> <?php echo utf8_encode($answer['Answer'])?>
 							</div>
 						</div>
 					</div>
+		<?php } ?>
 				</div>
 			</div>
-			<div class="col-md-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Was isst Phong am liebsten auf seiner Pizza?</h3>
-					</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-md-6">
-								<label><input type="radio" id="mc" name="Zahlmethode" value="Mastercard"> Salami</label>
-							</div>
-							<div class="col-md-6">
-								<input type="radio" id="mc" name="Zahlmethode" value="Mastercard"> Salami
-							</div>
-							<div class="col-md-6">
-								<input type="radio" id="mc" name="Zahlmethode" value="Mastercard"> Salami
-							</div>
-							<div class="col-md-6">
-								<input type="radio" id="mc" name="Zahlmethode" value="Mastercard"> Salami
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+	<?php }?>
 		</div>
-
-
 	</div>
+
 	<hr />
 	<?php include_once 'resources/footer.php';?>
+
+
 </body>
 </html>
