@@ -103,10 +103,15 @@ class Database {
 	//Get Categories function
 	public function getAllCategories(){
 		$result = $this->TABLE_CATEGORY->getAllCategories();
-
+		
+		//Categories array with quiz obj
 		$categories = array();
+		
 		while ($category = sqlsrv_fetch_array($result)){
-			array_push($categories, $category);
+			$quiz = new Quiz();
+			$quiz->setCategory($category['Category']);
+			$quiz->setCategoryID($category['ID_Category']);
+			array_push($categories, $quiz);
 		}
 		$this->closeConn();
 		
@@ -115,6 +120,9 @@ class Database {
 	
 	//Create Quiz
 	public function createQuiz($id_category) {
+		/*
+		 * get random
+		 */
 		$quiz = array();
 		//Get 10 random questions from category
 		$result = $this->TABLE_QUESTION->getQuestions($id_category);
