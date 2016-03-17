@@ -11,8 +11,9 @@ class Table_QUESTION {
 
 public function getQuestions($id_category) {
 	$params = array($id_category, '1');
-	
-	$query = "SELECT TOP 10 [ID_Question]
+	$val = '3';
+
+	$query = "SELECT TOP ".$val." [ID_Question]
       	,[Question]
       	,[Difficulty_ID]
       	,[Category_ID]
@@ -21,6 +22,7 @@ public function getQuestions($id_category) {
   		WHERE [Category_ID] = ? AND [Active] = ?
   		ORDER BY NEWID()";
 		
+	echo $query;
 		$connection = Database::getInstance ()->openConn();
 		$stmt = sqlsrv_query($connection, $query, $params);
 		
