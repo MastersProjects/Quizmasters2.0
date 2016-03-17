@@ -18,7 +18,7 @@
 						<?php $categories = Database::getInstance()->getAllCategories();
 							foreach ($categories as $category){
 								//ID = ID in Datenbank
-								?><li><a href="quiz.php?id=<?php echo $category['ID_Category']?>"> <?php echo $category['Category']?></a></li>
+								?><li><a href="quiz.php?id=<?php echo $category->__get("categoryID");?>"> <?php echo $category->__get("category");?></a></li>
 						<?php }?>
 					</ul></li>
 				<?php if (isset($_SESSION['login']) and ($_SESSION['login'] == true)){?>
@@ -42,7 +42,7 @@
 						class="caret"></span> </a>
 					<ul class="dropdown-menu login-menu">
 						<li>
-							<form method="post" action="index.php">
+							<form method="post" action=<?php $_SERVER['PHP_SELF']?>>
 								<div class="form-group">
 									<label for="inputUsername">Username</label> <input type="text"
 										class="form-control" id="inputUsername" name="userLogin" placeholder="Username"
@@ -77,7 +77,7 @@
 					</h4>
 				</div>
 				<div class="container"></div>
-				<form method="post" action="index.php">
+				<form method="post" action=<?php $_SERVER['PHP_SELF']?>>
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-md-6">

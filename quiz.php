@@ -1,6 +1,7 @@
 <?php
 include_once 'database/database_infos.php';
 include_once 'database/Database.php';
+include_once 'resources/login_registration.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,11 +20,10 @@ include_once 'database/Database.php';
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
-				<img src="img/one.png" alt="Chania" width="100%">
+				<img src="img/one.png" alt="" width="100%">
 			</div>
-
 			<div class="item">
-				<img src="img/two.png" alt="Chania" width="100%">
+				<img src="img/two.png" alt="" width="100%">
 			</div>
 		</div>
 
@@ -41,19 +41,19 @@ include_once 'database/Database.php';
 		<div class="row">
 	<?php
 	
-$quiz = Database::getInstance ()->createQuiz ( $_GET ['id'] );
-	foreach ( $quiz [0] as $question ) {
+	$quiz = Database::getInstance ()->createQuiz ( $_GET ['id'], $categories );
+	foreach ( $quiz->__get ( 'questions' ) as $question ) {
 		?>
-			<div class="col-md-12">
+			<div class="col-md-11">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title"><?php echo utf8_encode($question['Question'])?></h3>
+						<h3 class="panel-title"><?php echo utf8_encode($question->__get('question'))?></h3>
 					</div>
-		<?php foreach ($quiz[1] as $answer){?>
+		<?php foreach ($question->__get('answers') as $answer){?>
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-md-6">
-								<input type="radio" id="" name="" value=""> <?php echo utf8_encode($answer['Answer'])?>
+								<input type="radio" id="" name="" value=""> <?php echo utf8_encode($answer->__get('answer'))?>
 							</div>
 						</div>
 					</div>

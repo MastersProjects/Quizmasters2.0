@@ -21,7 +21,7 @@ class Table_USER {
 	
 	//Function to register a user
 	public function registration($username, $firstname, $lastname, $email, $password) {
-		$params = array($username, $firstname, $lastname, $email, $password, 1);
+		$params = array($username, $firstname, $lastname, $password, $email, 1);
 		
 		$sql = "INSERT INTO [QUIZMASTERS].[dbo].[USER] ([Username]
       	,[Firstname]

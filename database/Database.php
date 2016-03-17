@@ -7,6 +7,9 @@ require_once 'Table_QUESTION.php';
 require_once 'Table_SOLVED_QUIZ.php';
 require_once 'Table_USER.php';
 require_once '/../model/User.php';
+require_once '/../model/Quiz.php';
+require_once '/../model/Question.php';
+require_once '/../model/Answer.php';
 
 /**
  * This is the controller between the the Database and the modell classes.
@@ -95,9 +98,20 @@ class Database {
 	
 	//Register function
 	public function registration($username, $firstname, $lastname, $email, $password) {
-		$this->TABLE_USER->registration($this->test_input($username), $this->test_input($firstname), $this->test_input($lastname), $this->test_input($email), md5($this->test_input($password)));
+		$result = $this->TABLE_USER->getUser($this->test_input($username));
+		$hasRows = sqlsrv_has_rows ($result);
+			
 		$this->closeConn();
-		$this->login($username, $password);
+		
+		if(!($hasRows)){
+			$this->TABLE_USER->registration($this->test_input($username), $this->test_input($firstname), $this->test_input($lastname), $this->test_input($email), md5($this->test_input($password)));
+			echo 'true';
+			return $this->login($username, $password);
+		} else {
+			echo 'false';
+			return false;
+		}
+		$this->closeConn();
 	}
 	
 	//Get Categories function
@@ -109,48 +123,52 @@ class Database {
 		
 		while ($category = sqlsrv_fetch_array($result)){
 			$quiz = new Quiz();
-			$quiz->setCategory($category['Category']);
-			$quiz->setCategoryID($category['ID_Category']);
+			$quiz->__set('category', $category['Category']);
+			$quiz->__set('categoryID', $category['ID_Category']);
 			array_push($categories, $quiz);
 		}
+
 		$this->closeConn();
 		
 		return $categories;
 	}
 	
 	//Create Quiz
-	public function createQuiz($id_category) {
-		/*
-		 * get random
-		 */
-		$quiz = array();
-		//Get 10 random questions from category
-		$result = $this->TABLE_QUESTION->getQuestions($id_category);
-		
-		$questions = array();
-		$question_id = array();
-		//Save every question and question_id into array
-		//question_id array is needed for params for answer
-		while ($question = sqlsrv_fetch_array($result)){
-			array_push($questions, $question);
-			array_push($question_id, $question['ID_Question']);
+	public function createQuiz($id_category, $quizzes) {		
+		//Get 10 questions for category
+		foreach($quizzes as $quiz){
+			if ($quiz->__get("categoryID") == $id_category){
+				//Get 10 random questions from category
+				$result_question = $this->TABLE_QUESTION->getQuestions($id_category);
+				$questions = array();
+				while ($question_result = sqlsrv_fetch_array($result_question)){
+					$question = new Question();
+					$question->__set("question", $question_result['Question']);
+					$question->__set('questionID', $question_result['ID_Question']);
+					$question->__set('difficulty', $question_result['Difficulty_ID']);
+					
+					array_push($questions, $question);
+				}
+				$quiz->__set('questions', $questions);
+				break;
+			}
 		}
-		//Add questions to quiz
-		array_push($quiz, $questions);
 		
 		$this->closeConn();
-		
-		//Get all answers for the 10 questions
-		$result = $this->TABLE_ANSWER->getAnswers($question_id);
-	
-		$answers = array();
-		//Save all answers
-		while ($answer = sqlsrv_fetch_array($result)){
-			array_push($answers, $answer);
+
+		//Get all the answers for each question
+		foreach ($quiz->__get('questions') as $question){
+			$result_answer = $this->TABLE_ANSWER->getAnswers($question->__get('questionID'));
+			$answers = array();
+			while($answer_result = sqlsrv_fetch_array($result_answer)){
+				$answer = new Answer();
+				$answer->__set('answer', $answer_result['Answer']);
+				$answer->__set('correct', $answer_result['Correct']);
+				array_push($answers, $answer);
+			}
+			$question->__set('answers', $answers);
 		}
-		//Add answers to quiz
-		array_push($quiz, $answers);
-		
+	
 		$this->closeConn();
 		return $quiz;
 	}

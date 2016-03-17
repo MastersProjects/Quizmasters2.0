@@ -22,7 +22,7 @@ public function getQuestions($id_category) {
   		ORDER BY NEWID()";
 		
 		$connection = Database::getInstance ()->openConn();
-		$stmt = sqlsrv_query( $connection, $query, $params);
+		$stmt = sqlsrv_query($connection, $query, $params);
 		
 		return($stmt);
 	}

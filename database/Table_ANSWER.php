@@ -10,16 +10,17 @@ require_once 'Database.php';
 class Table_ANSWER {
 
 public function getAnswers($question_id) {
+	$params = array($question_id);
+
 	$query = "SELECT TOP 1000 [ID_Answer]
       		,[Answer]
      		,[Correct]
       		,[Question_ID]
   			FROM [QUIZMASTERS].[dbo].[ANSWER]
-  			WHERE Question_ID = ? or Question_ID = ? or Question_ID = ? or Question_ID = ? or Question_ID = ?
-			or Question_ID = ? or Question_ID = ? or Question_ID = ? or Question_ID = ? or Question_ID = ?"; 
+  			WHERE Question_ID = ?";
 	
 	$connection = Database::getInstance ()->openConn();
-	$stmt = sqlsrv_query( $connection, $query, $question_id);
+	$stmt = sqlsrv_query( $connection, $query, $params);
 	
 	return($stmt);
 	}
