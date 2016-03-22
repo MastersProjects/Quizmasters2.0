@@ -14,7 +14,7 @@ public function getQuestions($id_category, $id_difficulty, $amount) {
 
 	
 	
-	$query = "SELECT TOP ".$amount." [Question],[Points]
+	$query = "SELECT TOP ".$amount." [ID_Question],[Question],[Points]
 				FROM [QUIZMASTERS].[dbo].[QUESTION]
 				JOIN [QUIZMASTERS].[dbo].[DIFFICULTY] 
 				ON [QUIZMASTERS].[dbo].[QUESTION].Difficulty_ID = [QUIZMASTERS].[dbo].[DIFFICULTY].ID_Difficulty

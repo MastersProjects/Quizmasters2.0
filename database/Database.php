@@ -174,7 +174,7 @@ class Database {
 		$newquestions = $questions;
 		while ($question_result = sqlsrv_fetch_array($result_question)){
 			$question = new Question();
-			$question->__set("$questionID", $question_result['ID_Question']);
+			$question->__set("questionID", $question_result['ID_Question']);
 			$question->__set("question", $question_result['Question']);
 			$question->__set("points", $question_result['Points']);
 				
