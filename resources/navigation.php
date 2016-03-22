@@ -21,7 +21,11 @@
 								?><li><a href="quiz.php?id=<?php echo $category->__get("categoryID");?>"> <?php echo $category->__get("category");?></a></li>
 						<?php }?>
 					</ul></li>
-				<?php if (isset($_SESSION['login']) and ($_SESSION['login'] == true)){?>
+					<script>
+console.log("<?php echo $_SESSION['login']?>");
+					</script>
+				<?php 
+				if (isset($_SESSION['login']) and ($_SESSION['login'] == true)){?>
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#">Profil<span class="caret"></span>
 				</a>
@@ -33,8 +37,7 @@
 				<?php }?>
 				<li><a href="#">Rangliste</a></li>
 			</ul>
-			<?php if (!(isset($_SESSION['login'])) or ($_
-					['login'] == false)){ ?>
+			<?php if (!(isset($_SESSION['login'])) or ($_SESSION['login'] == false)){ ?>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a data-toggle="modal" href="#myModal"><i
 						class="fa fa-user-plus"></i> Sign Up</a></li>

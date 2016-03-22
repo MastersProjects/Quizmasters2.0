@@ -1,5 +1,3 @@
-<?php session_start();?>
-
 <meta charset="utf-8">
 
 <title>QuizMasters 2.0</title>

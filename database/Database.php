@@ -85,7 +85,6 @@ class Database {
  		$result = sqlsrv_fetch_array ($result);
  		
  		$this->closeConn();
- 		
 		if($result['Password'] == md5($password)){
 			$user = new User($result['Username'], $result['Firstname'], $result['Lastname'], $result['Email']);
 			$_SESSION['login'] = true;
@@ -105,7 +104,7 @@ class Database {
 		$this->closeConn();
 		
 		if(!($hasRows)){
-			$this->TABLE_USER->registration($this->test_input($username), $this->test_input($firstname), $this->test_input($lastname), $this->test_input($email), md5($this->test_input($password)));
+			$res = $this->TABLE_USER->registration($this->test_input($username), $this->test_input($firstname), $this->test_input($lastname), $this->test_input($email), md5($this->test_input($password)));
 			echo 'true';
 			return $this->login($username, $password);
 		} else {
