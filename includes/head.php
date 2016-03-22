@@ -1,3 +1,5 @@
+<?php session_start();?>
+
 <meta charset="utf-8">
 
 <title>QuizMasters 2.0</title>
@@ -22,4 +24,5 @@
 
 <!-- Custom CSS -->
 <link rel="stylesheet" href="style/custom.css">
+
 

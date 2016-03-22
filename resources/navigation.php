@@ -33,7 +33,8 @@
 				<?php }?>
 				<li><a href="#">Rangliste</a></li>
 			</ul>
-			<?php if (!(isset($_SESSION['login'])) or ($_SESSION['login'] == false)){ ?>
+			<?php if (!(isset($_SESSION['login'])) or ($_
+					['login'] == false)){ ?>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a data-toggle="modal" href="#myModal"><i
 						class="fa fa-user-plus"></i> Sign Up</a></li>

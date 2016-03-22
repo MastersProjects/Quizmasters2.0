@@ -85,6 +85,7 @@ class Database {
  		$result = sqlsrv_fetch_array ($result);
  		
  		$this->closeConn();
+ 		
 		if($result['Password'] == md5($password)){
 			$user = new User($result['Username'], $result['Firstname'], $result['Lastname'], $result['Email']);
 			$_SESSION['login'] = true;

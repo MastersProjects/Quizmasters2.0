@@ -1,5 +1,4 @@
 <?php
-session_start();
 if($_POST){
 	if((isset($_POST['userLogin'])) && (isset($_POST['passwordLogin']))){
 		$login = Database::getInstance()->login($_POST['userLogin'], $_POST['passwordLogin']);
