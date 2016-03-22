@@ -60,6 +60,10 @@
 						</li>
 					</ul></li>
 			</ul>
+			<?php } else {?>
+			<ul class="nav navbar-nav navbar-right">
+			<li><a href="resources/logout.php"><i class="glyphicon glyphicon-log-out"></i> Abmelden</a></li>
+			</ul>
 			<?php }?>
 		</div>
 	</div>

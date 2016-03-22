@@ -62,3 +62,11 @@ body {
 .panel-body {
 	background-color: #F4F0EA;
 }
+
+.alert{
+	 position: absolute;
+	 z-index: 999;
+  top: 11%;
+  left: 20px;
+  right: 20px;
+}
