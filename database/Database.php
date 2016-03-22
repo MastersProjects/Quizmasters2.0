@@ -88,7 +88,7 @@ class Database {
 		if($result['Password'] == md5($password)){
 			$user = new User($result['Username'], $result['Firstname'], $result['Lastname'], $result['Email']);
 			$_SESSION['login'] = true;
-			$_SESSION['user'] = $user;
+			$_SESSION['user'] = serialize($user);
 			return true;
 		} else {
 			$_SESSION['login'] = false;

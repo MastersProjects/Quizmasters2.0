@@ -28,4 +28,8 @@ Class User{
 		return $this->points;
 	}
 	
+	public function getUsername(){
+		return $this->username;
+	}
+	
 }
