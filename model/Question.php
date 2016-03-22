@@ -10,7 +10,7 @@ Class Question{
 	private $question;
 	private $questionID;
 	private $answers = array();
-	private $difficulty;
+	private $points;
 	
 	public function __get($property) {
 		if (property_exists($this, $property)) {

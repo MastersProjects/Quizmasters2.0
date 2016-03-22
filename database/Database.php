@@ -104,7 +104,7 @@ class Database {
 		$this->closeConn();
 		
 		if(!($hasRows)){
-			$this->TABLE_USER->registration($this->test_input($username), $this->test_input($firstname), $this->test_input($lastname), $this->test_input($email), md5($this->test_input($password)));
+			$res = $this->TABLE_USER->registration($this->test_input($username), $this->test_input($firstname), $this->test_input($lastname), $this->test_input($email), md5($this->test_input($password)));
 			echo 'true';
 			return $this->login($username, $password);
 		} else {
@@ -134,21 +134,17 @@ class Database {
 	}
 	
 	//Create Quiz
-	public function createQuiz($id_category, $quizzes) {		
+	public function createQuiz($id_category, $quizes) {		
 		//Get 10 questions for category
-		foreach($quizzes as $quiz){
+		foreach($quizes as $quiz){
 			if ($quiz->__get("categoryID") == $id_category){
 				//Get 10 random questions from category
-				$result_question = $this->TABLE_QUESTION->getQuestions($id_category);
 				$questions = array();
-				while ($question_result = sqlsrv_fetch_array($result_question)){
-					$question = new Question();
-					$question->__set("question", $question_result['Question']);
-					$question->__set('questionID', $question_result['ID_Question']);
-					$question->__set('difficulty', $question_result['Difficulty_ID']);
-					
-					array_push($questions, $question);
-				}
+				
+				$questions = parseQuiz($this->TABLE_QUESTION->getQuestions($id_category, 4, 1),$questions); //4 'Einfach' Questions
+				$questions = parseQuiz($this->TABLE_QUESTION->getQuestions($id_category, 3, 2),$questions); //3 'Mittel' Questions
+				$questions = parseQuiz($this->TABLE_QUESTION->getQuestions($id_category, 3, 3),$questions); //3 'Schwer' Questions
+				
 				$quiz->__set('questions', $questions);
 				break;
 			}
@@ -171,6 +167,20 @@ class Database {
 	
 		$this->closeConn();
 		return $quiz;
+	}
+	
+	//Parse Quiz (for createQuiz function)
+	public function parseQuiz($result_question, $questions){
+		$newquestions = $questions;
+		while ($question_result = sqlsrv_fetch_array($result_question)){
+			$question = new Question();
+			$question->__set("$questionID", $question_result['ID_Question']);
+			$question->__set("question", $question_result['Question']);
+			$question->__set("points", $question_result['Points']);
+				
+			array_push($newquestions, $question);
+		}
+		return $newquestions;
 	}
 		
 	public function getServerName(){

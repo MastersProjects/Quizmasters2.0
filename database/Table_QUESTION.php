@@ -9,18 +9,17 @@ require_once 'Database.php';
  */
 class Table_QUESTION {
 
-public function getQuestions($id_category) {
-	$params = array($id_category, '1');
-	$val = '3';
+public function getQuestions($id_category, $id_difficulty, $amount) {
+	$params = array($id_category, '1', $id_difficulty);
 
-	$query = "SELECT TOP ".$val." [ID_Question]
-      	,[Question]
-      	,[Difficulty_ID]
-      	,[Category_ID]
-      	,[Active]
-  		FROM [QUIZMASTERS].[dbo].[QUESTION]
-  		WHERE [Category_ID] = ? AND [Active] = ?
-  		ORDER BY NEWID()";
+	
+	
+	$query = "SELECT TOP ".$amount." [Question],[Points]
+				FROM [QUIZMASTERS].[dbo].[QUESTION]
+				JOIN [QUIZMASTERS].[dbo].[DIFFICULTY] 
+				ON [QUIZMASTERS].[dbo].[QUESTION].Difficulty_ID = [QUIZMASTERS].[dbo].[DIFFICULTY].ID_Difficulty
+				WHERE [Category_ID] = ? AND [Active] = ? AND [Difficulty_ID] = ?
+				ORDER BY NEWID();";
 		
 	echo $query;
 		$connection = Database::getInstance ()->openConn();
