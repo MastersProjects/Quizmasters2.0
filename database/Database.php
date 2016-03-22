@@ -140,10 +140,13 @@ class Database {
 			if ($quiz->__get("categoryID") == $id_category){
 				//Get 10 random questions from category
 				$questions = array();
-				
+				echo $questions;
 				$questions = $this->parseQuiz($this->TABLE_QUESTION->getQuestions($id_category, 4, 1),$questions); //4 'Einfach' Questions
+				echo $questions;
 				$questions = $this->parseQuiz($this->TABLE_QUESTION->getQuestions($id_category, 3, 2),$questions); //3 'Mittel' Questions
+				echo $questions;
 				$questions = $this->parseQuiz($this->TABLE_QUESTION->getQuestions($id_category, 3, 3),$questions); //3 'Schwer' Questions
+				echo $questions;
 				
 				$quiz->__set('questions', $questions);
 				break;
