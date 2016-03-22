@@ -96,6 +96,15 @@ class Database {
 		}
 	}
 	
+	
+	public function checkUser($username) {
+		$result = $this->TABLE_USER->getUser($this->test_input($username));
+		$result = sqlsrv_has_rows($result);
+		$this->closeConn();
+		return($result);
+		
+	}
+	
 	//Register function
 	public function registration($username, $firstname, $lastname, $email, $password) {
 		$result = $this->TABLE_USER->getUser($this->test_input($username));

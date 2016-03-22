@@ -47,12 +47,12 @@
 								<div class="form-group">
 									<label for="inputUsername">Username</label> <input type="text"
 										class="form-control" id="inputUsername" name="userLogin" placeholder="Username"
-										required>
+										>
 								</div>
 								<div class="form-group">
 									<label for="inputPassword">Passwort</label><input
 										type="password" class="form-control" id="inputPassword"
-										placeholder="Passwort" name="passwordLogin" required> <a href="#"> Passwort
+										placeholder="Passwort" name="passwordLogin"> <a href="#"> Passwort
 										vergessen?</a>
 								</div>
 								<button type="submit" class="btn btn-default">Anmelden</button>
@@ -89,7 +89,7 @@
 								<div class="form-group">
 									<label for="inputUsername">Username</label> <input type="text"
 										class="form-control" id="inputUsername" name="username" placeholder="Username"
-										required>
+										>
 								</div>
 							</div>
 						</div>
@@ -99,14 +99,14 @@
 								<div class="form-group">
 									<label for="inputFirstname">Vorname</label> <input type="text"
 										class="form-control" id="inputFirstname" name="surname" placeholder="Vorname"
-										required>
+										>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="inputName">Nachname</label> <input type="text"
 										class="form-control" id="inputName" name="name" placeholder="Nachname"
-										required>
+										>
 								</div>
 							</div>
 						</div>
@@ -124,14 +124,14 @@
 								<div class="form-group">
 									<label for="inputPassword">Passwort</label><input
 										type="password" class="form-control" name="passwordOne" id="inputPassword"
-										placeholder="Password" required>
+										placeholder="Password" >
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="inputPassword">Passwort best&auml;tigen</label><input
-										type="password" class="form-control" name="passwordTow" id="inputPassword"
-										placeholder="Password" required>
+										type="password" class="form-control" name="passwordTwo" id="inputPassword"
+										placeholder="Password" >
 								</div>
 							</div>
 						</div>
