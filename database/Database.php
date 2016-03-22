@@ -141,9 +141,9 @@ class Database {
 				//Get 10 random questions from category
 				$questions = array();
 				
-				$questions = parseQuiz($this->TABLE_QUESTION->getQuestions($id_category, 4, 1),$questions); //4 'Einfach' Questions
-				$questions = parseQuiz($this->TABLE_QUESTION->getQuestions($id_category, 3, 2),$questions); //3 'Mittel' Questions
-				$questions = parseQuiz($this->TABLE_QUESTION->getQuestions($id_category, 3, 3),$questions); //3 'Schwer' Questions
+				$questions = $this->parseQuiz($this->TABLE_QUESTION->getQuestions($id_category, 4, 1),$questions); //4 'Einfach' Questions
+				$questions = $this->parseQuiz($this->TABLE_QUESTION->getQuestions($id_category, 3, 2),$questions); //3 'Mittel' Questions
+				$questions = $this->parseQuiz($this->TABLE_QUESTION->getQuestions($id_category, 3, 3),$questions); //3 'Schwer' Questions
 				
 				$quiz->__set('questions', $questions);
 				break;
