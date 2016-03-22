@@ -39,28 +39,33 @@ include_once 'resources/login_registration.php';
 	</div>
 	<div class="container">
 		<div class="row">
-	<?php
-	
-	$quiz = Database::getInstance ()->createQuiz ( $_GET ['id'], $categories );
-	foreach ( $quiz->__get ( 'questions' ) as $question ) {
-		?>
-			<div class="col-md-11">
+			<?php
+
+			$quiz = Database::getInstance ()->createQuiz ( $_GET ['id'], $categories );
+			foreach ( $quiz->__get ( 'questions' ) as $question ) {
+				?>
+			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title"><?php echo utf8_encode($question->__get('question'))?></h3>
+						<h3 class="panel-title">
+							<?php echo utf8_encode($question->__get('question'))?>
+						</h3>
 					</div>
-		<?php foreach ($question->__get('answers') as $answer){?>
 					<div class="panel-body">
 						<div class="row">
+							<?php foreach ($question->__get('answers') as $answer){?>
+
 							<div class="col-md-6">
-								<input type="radio" id="" name="" value=""> <?php echo utf8_encode($answer->__get('answer'))?>
+								<input type="radio" id="" name="" value="">
+								<?php echo utf8_encode($answer->__get('answer'))?>
 							</div>
+
+							<?php } ?>
 						</div>
 					</div>
-		<?php } ?>
 				</div>
 			</div>
-	<?php }?>
+			<?php }?>
 		</div>
 	</div>
 

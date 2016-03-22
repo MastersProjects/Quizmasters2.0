@@ -21,9 +21,6 @@
 								?><li><a href="quiz.php?id=<?php echo $category->__get("categoryID");?>"> <?php echo $category->__get("category");?></a></li>
 						<?php }?>
 					</ul></li>
-					<script>
-console.log("<?php echo $_SESSION['login']?>");
-					</script>
 				<?php 
 				if (isset($_SESSION['login']) and ($_SESSION['login'] == true)){?>
 				<li class="dropdown"><a class="dropdown-toggle"
