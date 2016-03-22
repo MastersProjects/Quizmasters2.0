@@ -88,7 +88,7 @@ class Database {
 		if($result['Password'] == md5($password)){
 			$user = new User($result['Username'], $result['Firstname'], $result['Lastname'], $result['Email']);
 			$_SESSION['login'] = true;
-			$_SESSION['user'] = $user;
+			$_SESSION['user'] = serialize($user);
 			return true;
 		} else {
 			$_SESSION['login'] = false;
@@ -149,13 +149,10 @@ class Database {
 			if ($quiz->__get("categoryID") == $id_category){
 				//Get 10 random questions from category
 				$questions = array();
-				echo $questions;
-				$questions = $this->parseQuiz($this->TABLE_QUESTION->getQuestions($id_category, 4, 1),$questions); //4 'Einfach' Questions
-				echo $questions;
-				$questions = $this->parseQuiz($this->TABLE_QUESTION->getQuestions($id_category, 3, 2),$questions); //3 'Mittel' Questions
-				echo $questions;
+				$questions = $this->parseQuiz($this->TABLE_QUESTION->getQuestions($id_category, 1, 4),$questions); //4 'Einfach' Questions			
+				$questions = $this->parseQuiz($this->TABLE_QUESTION->getQuestions($id_category, 2, 3),$questions); //3 'Mittel' Questions		
 				$questions = $this->parseQuiz($this->TABLE_QUESTION->getQuestions($id_category, 3, 3),$questions); //3 'Schwer' Questions
-				echo $questions;
+				var_dump($questions);
 				
 				$quiz->__set('questions', $questions);
 				break;

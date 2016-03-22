@@ -24,10 +24,12 @@
 				<?php 
 				if (isset($_SESSION['login']) and ($_SESSION['login'] == true)){?>
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Profil<span class="caret"></span>
+					data-toggle="dropdown" href="#"><?php 
+						$user = unserialize($_SESSION['user']);
+						echo $user->getUsername();?><span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu">
-						<li><a href="#">..Username..</a></li>
+						<li><a href="#">Profil</a></li>
 						<li><a href="#">Statistik</a></li>
 						<li><a href="#">Abzeichen</a></li>
 					</ul></li>

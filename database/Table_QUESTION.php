@@ -21,7 +21,7 @@ public function getQuestions($id_category, $id_difficulty, $amount) {
 				WHERE [Category_ID] = ? AND [Active] = ? AND [Difficulty_ID] = ?
 				ORDER BY NEWID();";
 		
-	echo $query;
+// 	echo $query;
 		$connection = Database::getInstance ()->openConn();
 		$stmt = sqlsrv_query($connection, $query, $params);
 		
