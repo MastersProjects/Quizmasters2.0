@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once 'database/database_infos.php';
 include_once 'database/Database.php';
 include_once 'resources/login_registration.php';

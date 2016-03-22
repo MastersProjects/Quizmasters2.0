@@ -28,9 +28,9 @@ class Table_USER {
       	,[Lastname]
       	,[Password]
       	,[Email]
-      	,[Active]) VALUES (?, ?, ?, ?, ?, ?))";
+      	,[Active]) VALUES (?, ?, ?, ?, ?, ?)";
 		
 		$connection = Database::getInstance ()->openConn();
-		sqlsrv_query( $connection, $sql, $params);
+		$result = sqlsrv_query( $connection, $sql, $params);
 	}
 }

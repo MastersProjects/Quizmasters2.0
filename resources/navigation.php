@@ -21,7 +21,8 @@
 								?><li><a href="quiz.php?id=<?php echo $category->__get("categoryID");?>"> <?php echo $category->__get("category");?></a></li>
 						<?php }?>
 					</ul></li>
-				<?php if (isset($_SESSION['login']) and ($_SESSION['login'] == true)){?>
+				<?php 
+				if (isset($_SESSION['login']) and ($_SESSION['login'] == true)){?>
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#">Profil<span class="caret"></span>
 				</a>
