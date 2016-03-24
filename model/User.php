@@ -11,7 +11,7 @@ Class User{
 	private $firstname;
 	private $lastname;
 	private $email;
-	private $points = array();
+	private $points;
 	
 	public function __construct($username, $firstname, $lastname, $email){
 		$this->username = $username;
@@ -20,16 +20,16 @@ Class User{
 		$this->email = $email;
 	}
 	
-	public function addPoints($point){
-		array_push($this->points, $point);
+	public function __get($property) {
+		if (property_exists($this, $property)) {
+			return $this->$property;
+		}
 	}
 	
-	public function getPoints(){
-		return $this->points;
-	}
-	
-	public function getUsername(){
-		return $this->username;
+	public function __set($property, $value) {
+		if (property_exists($this, $property)) {
+			$this->$property = $value;
+		}
 	}
 	
 }

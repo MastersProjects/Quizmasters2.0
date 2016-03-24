@@ -7,7 +7,11 @@
 				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="index.php">QuizMasters 2.0</a>
+			<a class="navbar-brand" href="index.php" title="Quizmasters Logo">
+        <img style="max-width:100px; margin-top: -7px;"
+             src="img/logo.png">
+    </a>
+			
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
@@ -26,12 +30,12 @@
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#"><?php 
 						$user = unserialize($_SESSION['user']);
-						echo $user->getUsername();?><span class="caret"></span>
+						echo $user->__GET('username');?><span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Profil</a></li>
+						<li><a href="profile.php">Profil</a></li>
 						<li><a href="#">Statistik</a></li>
-						<li><a href="#">Abzeichen</a></li>
+				<!-- <li><a href="#">Abzeichen</a></li> -->
 					</ul></li>
 				<?php }?>
 				<li><a href="#">Rangliste</a></li>
@@ -90,7 +94,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="inputUsername">Username</label> <input type="text"
-										class="form-control" id="inputUsername" name="username" placeholder="Username"
+										class="form-control" id="inputUsername" name="username" placeholder="Username" value=<?php if(isset($_SESSION['regfail']) && $_SESSION['regfail'] == true){echo $_POST['username'];}?>
 										>
 								</div>
 							</div>
@@ -100,27 +104,25 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="inputFirstname">Vorname</label> <input type="text"
-										class="form-control" id="inputFirstname" name="surname" placeholder="Vorname"
-										>
+										class="form-control" id="inputFirstname" name="surname" placeholder="Vorname" value=<?php if(isset($_SESSION['regfail']) && $_SESSION['regfail'] == true){echo $_POST['name'];}?>>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="inputName">Nachname</label> <input type="text"
-										class="form-control" id="inputName" name="name" placeholder="Nachname"
-										>
+										class="form-control" id="inputName" name="name" placeholder="Nachname" value=<?php if(isset($_SESSION['regfail']) && $_SESSION['regfail'] == true){echo $_POST['surname'];}?>>
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label for="inputEmail">Email</label> <input type="email"
-										class="form-control" id="inputEmail" name="email" placeholder="Email"
-										required>
+									<label for="inputEmail">Email</label> <input type="text"
+										class="form-control" id="inputEmail" name="email" placeholder="Email" value=<?php if(isset($_SESSION['regfail']) && $_SESSION['regfail'] == true){echo $_POST['email'];}?>>
 								</div>
 							</div>
 						</div>
+						<?php $_SESSION['regfail'] = false;?>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
