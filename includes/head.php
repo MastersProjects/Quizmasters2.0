@@ -23,4 +23,8 @@
 <!-- Custom CSS -->
 <link rel="stylesheet" href="style/custom.css">
 
+  <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 
+<script
+	src="js/validate.js"></script>

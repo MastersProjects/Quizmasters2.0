@@ -88,14 +88,13 @@
 					</h4>
 				</div>
 				<div class="container"></div>
-				<form method="post" action=<?php $_SERVER['PHP_SELF']?>>
+				<form method="post" id="user-form" action=<?php $_SERVER['PHP_SELF']?>>
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="inputUsername">Username</label> <input type="text"
-										class="form-control" id="inputUsername" name="username" placeholder="Username" value=<?php if(isset($_SESSION['regfail']) && $_SESSION['regfail'] == true){echo $_POST['username'];}?>
-										>
+										class="form-control" id="inputUsername" name="username" placeholder="Username">
 								</div>
 							</div>
 						</div>
@@ -104,13 +103,13 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="inputFirstname">Vorname</label> <input type="text"
-										class="form-control" id="inputFirstname" name="surname" placeholder="Vorname" value=<?php if(isset($_SESSION['regfail']) && $_SESSION['regfail'] == true){echo $_POST['name'];}?>>
+										class="form-control" id="inputFirstname" name="firstname" placeholder="Vorname">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="inputName">Nachname</label> <input type="text"
-										class="form-control" id="inputName" name="name" placeholder="Nachname" value=<?php if(isset($_SESSION['regfail']) && $_SESSION['regfail'] == true){echo $_POST['surname'];}?>>
+										class="form-control" id="inputName" name="lastname" placeholder="Nachname">
 								</div>
 							</div>
 						</div>
@@ -118,23 +117,22 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="inputEmail">Email</label> <input type="text"
-										class="form-control" id="inputEmail" name="email" placeholder="Email" value=<?php if(isset($_SESSION['regfail']) && $_SESSION['regfail'] == true){echo $_POST['email'];}?>>
+										class="form-control" id="inputEmail" name="email" placeholder="Email">
 								</div>
 							</div>
 						</div>
-						<?php $_SESSION['regfail'] = false;?>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="inputPassword">Passwort</label><input
-										type="password" class="form-control" name="passwordOne" id="inputPassword"
+										type="password" class="form-control" name="passwordOne" id="passwordOne"
 										placeholder="Password" >
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="inputPassword">Passwort best&auml;tigen</label><input
-										type="password" class="form-control" name="passwordTwo" id="inputPassword"
+										type="password" class="form-control" name="passwordTwo" id="passwordTwo"
 										placeholder="Password" >
 								</div>
 							</div>
