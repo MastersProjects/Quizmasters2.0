@@ -167,6 +167,7 @@ class Database {
 			$answers = array();
 			while($answer_result = sqlsrv_fetch_array($result_answer)){
 				$answer = new Answer();
+				$answer->__set('answerID', $answer_result['ID_Answer']);
 				$answer->__set('answer', $answer_result['Answer']);
 				$answer->__set('correct', $answer_result['Correct']);
 				array_push($answers, $answer);
