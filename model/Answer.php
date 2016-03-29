@@ -9,6 +9,7 @@
 Class Answer{
 	private $answer;
 	private $correct;
+	private $answerID;
 	
 	public function __get($property) {
 		if (property_exists($this, $property)) {
