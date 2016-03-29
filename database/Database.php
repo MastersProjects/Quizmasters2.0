@@ -86,7 +86,7 @@ class Database {
  		
  		$this->closeConn();
 		if($result['Password'] == md5($password)){
-			$user = new User($result['Username'], $result['Firstname'], $result['Lastname'], $result['Email']);
+			$user = new User($result['Username'], $result['Firstname'], $result['Lastname'], $result['Email'], $result['Profile_Img']);
 			$_SESSION['login'] = true;
 			$_SESSION['user'] = serialize($user);
 			return true;

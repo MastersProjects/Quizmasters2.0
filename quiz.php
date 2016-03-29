@@ -7,7 +7,7 @@ include_once 'resources/login_registration.php';
 <!DOCTYPE html>
 <html>
 <head>
-<?php include_once 'includes/head.php'; ?>
+    <?php include_once 'includes/head.php'; ?>
 </head>
 <body>
 	<?php include_once 'resources/navigation.php'; ?>

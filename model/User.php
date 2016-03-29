@@ -12,12 +12,14 @@ Class User{
 	private $lastname;
 	private $email;
 	private $points;
+	private $profile_img;
 	
-	public function __construct($username, $firstname, $lastname, $email){
+	public function __construct($username, $firstname, $lastname, $email, $profile_img){
 		$this->username = $username;
 		$this->firstname = $firstname;
 		$this->lastname = $lastname;
 		$this->email = $email;
+		$this->profile_img = $profile_img;
 	}
 	
 	public function __get($property) {
