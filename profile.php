@@ -60,22 +60,6 @@ include_once 'resources/login_registration.php';
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="form-group">
-								<label for="inputPassword">Passwort</label><input
-									type="password" class="form-control" name="passwordOne"
-									id="passwordOne" placeholder="Password">
-							</div>
-						</div>
-						<div class="col-md-12">
-							<div class="form-group">
-								<label for="inputPassword">Passwort best&auml;tigen</label><input
-									type="password" class="form-control" name="passwordTwo"
-									id="passwordTwo" placeholder="Password">
-							</div>
-						</div>
-					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="submit" class="btn btn-default">&Auml;ndern</button>

@@ -32,17 +32,32 @@ include_once 'resources/login_registration.php';
 				</div>
 			</div>
 			<hr />
+			<?php $count_cat = count($categories)-1;
+			$rand1 = 0;
+			$rand2 = 0;
+			while($rand1 == $rand2){
+			$rand1 = rand(0, $count_cat);
+			$rand2 = rand(0, $count_cat);
+			if($rand1 != $rand2){?>
 			<div class="row">
-			<?php foreach ($categories as $category){?>
 				<div class="col-xs-6 col-sm-3">
-					<img class="img-responsive" alt="Test" src="<?php echo $category->__get('img_path');?>">
+					<img class="img-responsive" alt="Image Category" src="<?php echo $categories[$rand1]->__get('img_path');?>">
 				</div>
 				<div class="col-xs-6 col-sm-3">
-					<p><?php echo $category->__get('description');?></p>
+					<h3><?php echo $categories[$rand1]->__get('category')?></h3>
+					<p><?php echo $categories[$rand1]->__get('description');?></p>
 				</div>
 				<div class="clearfix visible-xs"></div>
-				<?php }?>
+				<div class="col-xs-6 col-sm-3">
+					<img class="img-responsive" alt="Image Category" src="<?php echo $categories[$rand2]->__get('img_path');?>">
+				</div>
+				<div class="col-xs-6 col-sm-3">
+					<h3><?php echo $categories[$rand2]->__get('category')?></h3>
+					<p><?php echo $categories[$rand2]->__get('description');?></p>
+				</div>
 			</div>
+			<?php }
+			}?>
 		</div>
 		<div class="col-md-2">
 			<img src="img/ad.jpg" alt="Werbung" class="img-responsive">
