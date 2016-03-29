@@ -10,6 +10,8 @@
 class Quiz {
 	private $category;
 	private $categoryID;
+	private $description;
+	private $img_path;
 	private $questions = array();
 	
 	public function __get($property) {

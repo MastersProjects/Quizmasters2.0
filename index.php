@@ -33,25 +33,15 @@ include_once 'resources/login_registration.php';
 			</div>
 			<hr />
 			<div class="row">
+			<?php foreach ($categories as $category){?>
 				<div class="col-xs-6 col-sm-3">
-					<img class="img-responsive" alt="Test" src="img/placeholder.jpg">
+					<img class="img-responsive" alt="Test" src="<?php echo $category->__get('img_path');?>">
 				</div>
 				<div class="col-xs-6 col-sm-3">
-					<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-						diam nonumy eirmod tempor invidunt ut labore et dolore magna
-						aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-					</p>
+					<p><?php echo $category->__get('description');?></p>
 				</div>
 				<div class="clearfix visible-xs"></div>
-				<div class="col-xs-6 col-sm-3">
-					<img class="img-responsive" alt="Test" src="img/placeholder.jpg">
-				</div>
-				<div class="col-xs-6 col-sm-3">
-					<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-						diam nonumy eirmod tempor invidunt ut labore et dolore magna
-						aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-						duo dolores et ea rebum. Stet clita kasd gubergren, no sea</p>
-				</div>
+				<?php }?>
 			</div>
 		</div>
 		<div class="col-md-2">
