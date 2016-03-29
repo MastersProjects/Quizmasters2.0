@@ -11,11 +11,11 @@ include_once 'resources/login_registration.php';
 </head>
 <body>
 	<?php
-	
+
 	include_once 'resources/navigation.php';
 	$user = unserialize ( $_SESSION ['user'] );
 	?>
-<div class="container">
+	<div class="container">
 		<div class="col-md-12">
 			<h1>Dein Profil</h1>
 		</div>
@@ -60,31 +60,38 @@ include_once 'resources/login_registration.php';
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="form-group">
-								<label for="inputPassword">Passwort</label><input
-									type="password" class="form-control" name="passwordOne"
-									id="passwordOne" placeholder="Password">
-							</div>
-						</div>
-						<div class="col-md-12">
-							<div class="form-group">
-								<label for="inputPassword">Passwort best&auml;tigen</label><input
-									type="password" class="form-control" name="passwordTwo"
-									id="passwordTwo" placeholder="Password">
-							</div>
-						</div>
-					</div>
 				</div>
 				<div class="modal-footer">
+					<a href="#" class="btn btn-default">Passwort &auml;ndern</a>
 					<button type="submit" class="btn btn-default">&Auml;ndern</button>
 				</div>
 			</form>
 		</div>
 		<div class="col-md-4">
-			<img src="img/placeholder.jpg" alt="Cinque Terre" width="304"
-				height="236">
+			<img src="<?php echo $user->__GET('profile_img'); ?>"
+				alt="Profilbild" width="304" height="236">
+		</div>
+		<div class="col-md-12">
+		<hr />
+			<h2>Konto l&ouml;schen</h2>
+		</div>
+		<div class="col-md-7">
+			<div class="alert alert-danger">
+				<form action="#" method="POST">
+					<div class="row">
+						<div class="col-md-12">
+							<label for="inputDelete">M&ouml;chtest du dein Profil wirklich
+								l&ouml;schen? Gebe daf&uuml;r in das untere Felde Ja ein.</label>
+						</div>
+						<div class="col-md-8">
+							<input class="form-control" id="inputDelete" type="text" placeholder="Ja">
+						</div>
+						<div class="col-md-4">
+							<button class="btn btn-danger" type="submit">L&ouml;schen!</button>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 	<hr />
