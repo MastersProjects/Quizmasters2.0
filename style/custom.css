@@ -82,3 +82,7 @@ body {
 	max-width: 100px; 
 	margin-top: -12px;
 }
+
+.img-width {
+	width:100%;
+}
