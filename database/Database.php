@@ -114,10 +114,8 @@ class Database {
 		
 		if(!($hasRows)){
 			$res = $this->TABLE_USER->registration($this->test_input($username), $this->test_input($firstname), $this->test_input($lastname), $this->test_input($email), md5($this->test_input($password)));
-			echo 'true';
 			return $this->login($username, $password);
 		} else {
-			echo 'false';
 			return false;
 		}
 		$this->closeConn();
@@ -134,6 +132,8 @@ class Database {
 			$quiz = new Quiz();
 			$quiz->__set('category', $category['Category']);
 			$quiz->__set('categoryID', $category['ID_Category']);
+			$quiz->__set('description', $category['Description']);
+			$quiz->__set('img_path', $category['Img_Path']);
 			array_push($categories, $quiz);
 		}
 
@@ -152,7 +152,6 @@ class Database {
 				$questions = $this->parseQuiz($this->TABLE_QUESTION->getQuestions($id_category, 1, 4),$questions); //4 'Einfach' Questions			
 				$questions = $this->parseQuiz($this->TABLE_QUESTION->getQuestions($id_category, 2, 3),$questions); //3 'Mittel' Questions		
 				$questions = $this->parseQuiz($this->TABLE_QUESTION->getQuestions($id_category, 3, 3),$questions); //3 'Schwer' Questions
-				var_dump($questions);
 				
 				$quiz->__set('questions', $questions);
 				break;
