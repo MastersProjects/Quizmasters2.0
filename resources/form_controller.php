@@ -50,7 +50,7 @@ if ($_POST) {
 		}
 		
 		if (isset ( $_POST ['password1Update'] ) && (isset ( $_POST ['password2Update'] ))) {
-			Database::getInstance()->changePwd($_POST ['password1Update'], unserialize($_SESSION['user'])->__GET('username'));
+			Database::getInstance()->changePwd($_POST ['password1Update']);
 			echo '<div class="alert alertLogin alert-success alert-dismissible fade in">
 			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 			<strong>Erfolgreich!</strong> Dein Passwort wurde erfolgreich geändert!

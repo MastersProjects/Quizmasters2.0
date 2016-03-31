@@ -8,7 +8,11 @@ require_once 'Database.php';
  * Quizmasters 2.0 2016
  */
 class Table_USER {
-	//Function to get a user from the database
+	/**
+	 * Function to get a user from the database
+	 * @param $username
+	 * @return sql stmt
+	 */
 	public function getUser($username) {
 		$query = "SELECT * FROM [QUIZMASTERS].[dbo].[USER] WHERE [username] = ? AND [active] = '1'";
  		
@@ -19,7 +23,14 @@ class Table_USER {
 		return($stmt);
 	}
 	
-	//Function to register a user
+	/**
+	 * Function to register a user
+	 * @param $username
+	 * @param $firstname
+	 * @param $lastname
+	 * @param $email
+	 * @param $password
+	 */
 	public function registration($username, $firstname, $lastname, $email, $password) {
 		$params = array($username, $firstname, $lastname, $password, $email, 1);
 		
@@ -34,6 +45,14 @@ class Table_USER {
 		$result = sqlsrv_query( $connection, $sql, $params);
 	}
 	
+	/**
+	 * update user data
+	 * @param $username
+	 * @param $firstname
+	 * @param $lastname
+	 * @param $email
+	 * @param $newUsername
+	 */
 	public function userUpdate($username, $firstname, $lastname, $email, $newUsername) {
 		$params = array($newUsername, $firstname, $lastname, $email, $username);
 		
@@ -42,22 +61,31 @@ class Table_USER {
       		,[Firstname] = ?
       		,[Lastname] = ?
       		,[Email] = ?
- 			WHERE [Username] = ?";
+ 			WHERE [Username] = ? and [Active] = '1'";
 	
 		$connection = Database::getInstance ()->openConn();
 		$result = sqlsrv_query( $connection, $sql, $params);
 	}
 	
+	/**
+	 * Change password of a user
+	 * @param $password
+	 * @param $username
+	 */
 	public function changePwd($password, $username){
 		$params = array($password, $username);
 		$sql = "UPDATE [dbo].[USER]
   		SET [Password] = ?
- 		WHERE [Username] = ?";
+ 		WHERE [Username] = ? and [Active] = '1'";
 		
 		$connection = Database::getInstance ()->openConn();
 		$stmt = sqlsrv_query ( $connection, $sql, $params);
 	}
 	
+	/**
+	 * delete User from database
+	 * @param $username
+	 */
 	public function deleteUser($username){
 		$sql = "UPDATE [dbo].[USER]
   		SET [Active] = '0'

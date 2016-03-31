@@ -9,6 +9,10 @@ require_once 'Database.php';
  */
 class Table_CATEGORY {
 
+	/**
+	 * Get all active categories
+	 * @return sql stmt
+	 */
 	public function getAllCategories() {
 		$query = "SELECT * FROM [QUIZMASTERS].[dbo].[CATEGORY] WHERE [Active] = '1'";
 		$connection = Database::getInstance ()->openConn ();		

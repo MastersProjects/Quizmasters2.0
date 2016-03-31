@@ -9,9 +9,4 @@ require_once 'Database.php';
  */
 class Table_SOLVED_QUIZ {
 
-	public function fuctionName() {
-		$query = "";
-		$connection = Database::getInstance ()->getConnection ();
-		$connection->query ( $query );
-	}
 }

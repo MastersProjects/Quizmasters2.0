@@ -41,7 +41,6 @@ class Database {
 		$this->TABLE_USER = new Table_USER();
 	}
 	
-	// Singelton class
 	static public function getInstance() {
 		if (null === self::$instance) {
 			self::$instance = new self ();
@@ -49,12 +48,20 @@ class Database {
 		return self::$instance;
 	}
 	
-	// Set all the information for the connection to the database
+	/**
+	 * Set all the information for the connection to the database
+	 * @param $serverName serverName on which the DB is located
+	 * @param $connectionInfo connectionInfo array with spec for the connection
+	 */
 	public function setConnectionInfo($serverName, $connectionInfo) {
 		$this->serverName = $serverName;
 		$this->connectionInfo = $connectionInfo;
 	}
 	
+	/**
+	 * Open conenction for query
+	 * @return returns the connection for DB
+	 */
 	public function openConn(){
 		$this->connection = sqlsrv_connect( $this->serverName, $this->connectionInfo);
 		
@@ -62,11 +69,14 @@ class Database {
 			echo "Connection could not be established.<br />";
 			die( print_r( sqlsrv_errors(), true));
 		}
-	
 		return $this->connection;
 	}
 	
-	//Function to test the input
+	/**
+	 * Function to test the input
+	 * @param $data
+	 * @return data prepared for database
+	 */
 	private function test_input($data) {
 		$data = trim($data);
 		$data = stripslashes($data);
@@ -75,11 +85,17 @@ class Database {
 		return $data;
 	}
 	
+	//Close connection afer query was executed
 	public function closeConn(){
 		sqlsrv_close($this->connection);
 	}
 	
-	//Login function
+	/**
+	 * Login function
+	 * @param $username
+	 * @param $password
+	 * @return true if login succeded, false if failed
+	 */
 	public function login($username, $password) {
 		$result = $this->TABLE_USER->getUser($this->test_input($username));
  		$result = sqlsrv_fetch_array ($result);
@@ -95,6 +111,12 @@ class Database {
 		}
 	}
 
+	/**
+	 * Check if username is already in database
+	 * @param $username
+	 * @return true if user isn't in database,
+	 * false if it's already in the db 
+	 */
 	public function checkUser($username) {
 		$result = $this->TABLE_USER->getUser($this->test_input($username));
 		
@@ -107,7 +129,15 @@ class Database {
 		}
 	}
 	
-	//Register function
+	/**
+	 * function for the registration
+	 * @param $username
+	 * @param $firstname
+	 * @param $lastname
+	 * @param $email
+	 * @param $password
+	 * @return true if registration success, false if fail
+	 */
 	public function registration($username, $firstname, $lastname, $email, $password) {
 		if(!($this->checkUser($username))){
 			$res = $this->TABLE_USER->registration($this->test_input($username), $this->test_input($firstname), $this->test_input($lastname), $this->test_input($email), md5($this->test_input($password)));
@@ -119,11 +149,23 @@ class Database {
 		}
 	}
 	
-	public function changePwd($password, $username){
-		$this->TABLE_USER-> changePwd(md5($this->test_input($password)), $username);
+	/**
+	 * function to change the password for a user
+	 * @param $password
+	 */
+	public function changePwd($password){
+		$this->TABLE_USER-> changePwd(md5($this->test_input($password)), unserialize($_SESSION['user'])->__GET('username'));
 		$this->closeConn();
 	}
 	
+	/**
+	 * function to update the user data
+	 * @param $username new username
+	 * @param $firstname new firstname
+	 * @param $lastname new lastname
+	 * @param $email new email
+	 * @return true if success false if fail
+	 */
 	public function userUpdate($username, $firstname, $lastname, $email) {
 		$user = unserialize($_SESSION['user']);
 		
@@ -146,12 +188,18 @@ class Database {
 		}
 	}
 	
+	/**
+	 * Function to delete user
+	 * @param $username
+	 */
 	public function deleteUser($username){
 		$this->TABLE_USER->deleteUser($username);
 		$this->closeConn();
 	}
 	
-	//Get Categories function
+	/**
+	 * 
+	 */
 	public function getAllCategories(){
 		$result = $this->TABLE_CATEGORY->getAllCategories();
 		
@@ -170,7 +218,12 @@ class Database {
 		return $categories;
 	}
 	
-	//Create Quiz
+	/**
+	 * function to create new quiz with questions
+	 * @param $id_category
+	 * @param $quizes
+	 * @return @link{quiz} obeject
+	 */
 	public function createQuiz($id_category, $quizes) {		
 		//Get 10 questions for category
 		foreach($quizes as $quiz){
@@ -188,7 +241,6 @@ class Database {
 		
 		$this->closeConn();
 
-		//Get all the answers for each question
 		foreach ($quiz->__get('questions') as $question){
 			$result_answer = $this->TABLE_ANSWER->getAnswers($question->__get('questionID'));
 			$answers = array();
@@ -206,7 +258,10 @@ class Database {
 		return $quiz;
 	}
 	
-	//Parse Quiz (for createQuiz function)
+	/**
+	 * Parse Quiz (for createQuiz function)
+	 * @return array with @link{question}
+	 */
 	public function parseQuiz($result_question, $questions){
 		$newquestions = $questions;
 		while ($question_result = sqlsrv_fetch_array($result_question)){
@@ -219,7 +274,8 @@ class Database {
 		}
 		return $newquestions;
 	}
-		
+	
+	//Getter
 	public function getServerName(){
 		return $this->serverName;
 	}
