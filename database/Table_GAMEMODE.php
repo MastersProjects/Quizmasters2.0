@@ -9,9 +9,4 @@ require_once 'Database.php';
  */
 class Table_GAMEMODE {
 
-	public function fuctionName() {
-		$query = "";
-		$connection = Database::getInstance ()->getConnection ();
-		$connection->query ( $query );
-	}
 }

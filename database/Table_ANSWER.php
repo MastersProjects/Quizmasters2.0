@@ -9,6 +9,11 @@ require_once 'Database.php';
  */
 class Table_ANSWER {
 
+/**
+ * get the Answers with question_id
+ * @param $question_id
+ * @return sql stmt
+ */
 public function getAnswers($question_id) {
 	$params = array($question_id);
 
