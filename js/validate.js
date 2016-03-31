@@ -56,5 +56,51 @@ $(function() {
             form.submit();
         }
     });
+});
+$(function() {
+    $("#profile-form").validate({
+        
+        // Specify the validation rules
+        rules: {
+        	username: {
+        		required: true,
+        		maxlength: 45
+        	},
+            firstname: {
+        		required: true,
+        		maxlength: 45
+        	},
+            lastname: {
+        		required: true,
+        		maxlength: 45
+        	},
+            email: {
+                required: true,
+                email: true
+            }
+            
+        },
+        
+        // Specify the validation error messages
+        messages: {
+        	username: {
+        		required: "Username bitte ausf&uuml;llen",
+        		maxlength: "Username zu lang"
+        	},
+            firstname: {
+        		required: "Vorname bitte ausf&uuml;llen",
+        		maxlength: "Vorname zu lang"
+        	},
+            lastname: {
+        		required: "Nachname bitte ausf&uuml;llen",
+        		maxlength: "Nachname zu lang"
+        	},
+            email: "Bitte g&uuml;ltige Email eintragen",
+        },
+        
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
 
   });

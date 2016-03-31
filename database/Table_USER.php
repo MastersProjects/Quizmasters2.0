@@ -33,4 +33,38 @@ class Table_USER {
 		$connection = Database::getInstance ()->openConn();
 		$result = sqlsrv_query( $connection, $sql, $params);
 	}
+	
+	public function userUpdate($username, $firstname, $lastname, $email, $newUsername) {
+		$params = array($newUsername, $firstname, $lastname, $email, $username);
+		
+		$sql = "UPDATE [dbo].[USER]
+  			SET [Username] = ?
+      		,[Firstname] = ?
+      		,[Lastname] = ?
+      		,[Email] = ?
+ 			WHERE [Username] = ?";
+	
+		$connection = Database::getInstance ()->openConn();
+		$result = sqlsrv_query( $connection, $sql, $params);
+	}
+	
+	public function changePwd($password, $username){
+		$params = array($password, $username);
+		$sql = "UPDATE [dbo].[USER]
+  		SET [Password] = ?
+ 		WHERE [Username] = ?";
+		
+		$connection = Database::getInstance ()->openConn();
+		$stmt = sqlsrv_query ( $connection, $sql, $params);
+	}
+	
+	public function deleteUser($username){
+		$sql = "UPDATE [dbo].[USER]
+  		SET [Active] = '0'
+ 		WHERE [Username] = ?";
+		
+		$connection = Database::getInstance ()->openConn();
+		$params = array($username);
+		$stmt = sqlsrv_query ( $connection, $sql, $params);
+	}
 }

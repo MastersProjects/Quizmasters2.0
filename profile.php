@@ -1,8 +1,11 @@
 <?php
 session_start ();
+if(!(isset($_SESSION['user']))){
+	header('location: index.php');
+}
 include_once 'database/database_infos.php';
 include_once 'database/Database.php';
-include_once 'resources/login_registration.php';
+include_once 'resources/form_controller.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,7 +14,6 @@ include_once 'resources/login_registration.php';
 </head>
 <body>
 	<?php
-
 	include_once 'resources/navigation.php';
 	$user = unserialize ( $_SESSION ['user'] );
 	?>
@@ -20,13 +22,13 @@ include_once 'resources/login_registration.php';
 			<h1>Dein Profil</h1>
 		</div>
 		<div class="col-md-8">
-			<form method="post" id="user-form" action=#>
+			<form method="post" id="profile-form" action=#>
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="inputUsername">Username</label> <input type="text"
-									class="form-control" id="inputUsername" name="username"
+									class="form-control" id="inputUsername" name="usernameUpdate"
 									placeholder="Username"
 									value=<?php echo $user->__GET('username')?>>
 							</div>
@@ -37,7 +39,7 @@ include_once 'resources/login_registration.php';
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="inputFirstname">Vorname</label> <input type="text"
-									class="form-control" id="inputFirstname" name="firstname"
+									class="form-control" id="inputFirstname" name="firstnameUpdate"
 									placeholder="Vorname"
 									value=<?php echo $user->__GET('firstname')?>>
 							</div>
@@ -45,7 +47,7 @@ include_once 'resources/login_registration.php';
 						<div class="col-md-6">
 							<div class="form-group">
 								<label for="inputName">Nachname</label> <input type="text"
-									class="form-control" id="inputName" name="lastname"
+									class="form-control" id="inputName" name="lastnameUpdate"
 									placeholder="Nachname"
 									value=<?php echo $user->__GET('lastname')?>>
 							</div>
@@ -55,14 +57,14 @@ include_once 'resources/login_registration.php';
 						<div class="col-md-12">
 							<div class="form-group">
 								<label for="inputEmail">Email</label> <input type="text"
-									class="form-control" id="inputEmail" name="email"
+									class="form-control" id="inputEmail" name="emailUpdate"
 									placeholder="Email" value=<?php echo $user->__GET('email')?>>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<a href="#" class="btn btn-default">Passwort &auml;ndern</a>
+					<a href="#" class="btn btn-default" data-toggle="modal" data-target="#myModal">Passwort &auml;ndern</a>
 					<button type="submit" class="btn btn-default">&Auml;ndern</button>
 				</div>
 			</form>
@@ -77,14 +79,14 @@ include_once 'resources/login_registration.php';
 		</div>
 		<div class="col-md-7">
 			<div class="alert alert-danger">
-				<form action="#" method="POST">
+				<form action="<?php $_SERVER['PHP_SELF']?>" method="POST">
 					<div class="row">
 						<div class="col-md-12">
 							<label for="inputDelete">M&ouml;chtest du dein Profil wirklich
 								l&ouml;schen? Gebe daf&uuml;r in das untere Felde Ja ein.</label>
 						</div>
 						<div class="col-md-8">
-							<input class="form-control" id="inputDelete" type="text" placeholder="Ja">
+							<input class="form-control" name="delete" type="text" placeholder="Ja">
 						</div>
 						<div class="col-md-4">
 							<button class="btn btn-danger" type="submit">L&ouml;schen!</button>

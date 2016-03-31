@@ -91,33 +91,63 @@ class Database {
 			$_SESSION['user'] = serialize($user);
 			return true;
 		} else {
-			$_SESSION['login'] = false;
 			return false;
 		}
 	}
-	
-	
+
 	public function checkUser($username) {
 		$result = $this->TABLE_USER->getUser($this->test_input($username));
-		$result = sqlsrv_has_rows($result);
-		$this->closeConn();
-		return($result);
 		
+		if(sqlsrv_has_rows($result) == true){
+			$this->closeConn();
+			return true;
+		} else {
+			$this->closeConn();
+			return false;
+		}
 	}
 	
 	//Register function
 	public function registration($username, $firstname, $lastname, $email, $password) {
-		$result = $this->TABLE_USER->getUser($this->test_input($username));
-		$hasRows = sqlsrv_has_rows ($result);
-			
-		$this->closeConn();
-		
-		if(!($hasRows)){
+		if(!($this->checkUser($username))){
 			$res = $this->TABLE_USER->registration($this->test_input($username), $this->test_input($firstname), $this->test_input($lastname), $this->test_input($email), md5($this->test_input($password)));
-			return $this->login($username, $password);
+			$this->closeConn();
+			$this->login($username, $password);
+			return true;
 		} else {
 			return false;
 		}
+	}
+	
+	public function changePwd($password, $username){
+		$this->TABLE_USER-> changePwd(md5($this->test_input($password)), $username);
+		$this->closeConn();
+	}
+	
+	public function userUpdate($username, $firstname, $lastname, $email) {
+		$user = unserialize($_SESSION['user']);
+		
+		if(!($user->__GET('username') == $this->test_input($username))){
+			$duplicate = $this->checkUser($username);
+		} else {
+			$duplicate = false;
+		}
+		if(!($duplicate)){
+			$res = $this->TABLE_USER->userUpdate($user->__GET('username'), $this->test_input($firstname), $this->test_input($lastname), $this->test_input($email), $this->test_input($username));
+			$this->closeConn();
+			$user->__SET('username', $this->test_input($username));
+			$user->__SET('firstname', $this->test_input($firstname));
+			$user->__SET('lastname', $this->test_input($lastname));
+			$user->__SET('email', $this->test_input($email));
+			$_SESSION['user'] = serialize($user);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public function deleteUser($username){
+		$this->TABLE_USER->deleteUser($username);
 		$this->closeConn();
 	}
 	
@@ -136,9 +166,7 @@ class Database {
 			$quiz->__set('img_path', $category['Img_Path']);
 			array_push($categories, $quiz);
 		}
-
 		$this->closeConn();
-		
 		return $categories;
 	}
 	

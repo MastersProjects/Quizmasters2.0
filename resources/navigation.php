@@ -50,11 +50,11 @@
 			</ul>
 			<?php if (!(isset($_SESSION['login'])) or ($_SESSION['login'] == false)){ ?>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a data-toggle="modal" href="#myModal"><i
+				<li><a data-toggle="modal" href="#registerModal"><i
 						class="fa fa-user-plus"></i> Sign Up</a>
 				</li>
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"><i class="fa fa-sign-in"></i> Login<span
+					data-toggle="dropdown" href="#"><i class="fa fa-sign-in"></i>Login<span
 						class="caret"></span> </a>
 					<ul class="dropdown-menu login-menu">
 						<li>
@@ -87,7 +87,7 @@
 	</div>
 </nav>
 <div class="container">
-	<div class="modal" id="myModal">
+	<div class="modal fade" id="registerModal">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
