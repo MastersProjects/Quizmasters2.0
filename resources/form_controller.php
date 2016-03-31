@@ -59,8 +59,6 @@ if ($_POST) {
 			</div>';
 		}
 	}
-	
-	// For change user password
 	if (isset ( $_POST ['password1Update'] ) && (isset ( $_POST ['password2Update'] ))) {
 		Database::getInstance ()->changePwd ( $_POST ['password1Update'] );
 		echo '<div class="alert alertLogin alert-success alert-dismissible fade in">
