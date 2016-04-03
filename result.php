@@ -22,7 +22,7 @@ include_once 'resources/form_controller.php';
 			<form action="" method="post">
 				<?php
 				$quiz = unserialize($_SESSION['quiz']);	
-				var_dump($_POST);
+				$points = 0;
 				foreach ( $quiz->__get ( 'questions' ) as $question ) {
 					?>
 				<div class="col-md-12">
@@ -34,7 +34,15 @@ include_once 'resources/form_controller.php';
 						</div>
 						<div class="panel-body">
 							<div class="row">
-								<?php foreach ($question->__get('answers') as $answer){?>
+								<?php foreach ($question->__get('answers') as $answer){
+										//TODO Maybe random order because almost all true answer is the first
+										$if_checked = false;
+										if(array_key_exists($question->__get('questionID'), $_POST)){
+											if($_POST [$question->__get('questionID')] == $answer->__get('answerID')){
+												$if_checked = true;
+											}
+										}
+								?>
 	
 								<div class="col-md-6">
 									<input type="radio" 
@@ -42,14 +50,24 @@ include_once 'resources/form_controller.php';
 											name="<?php echo $question->__get('questionID')?>" 
 											value="<?php echo $answer->__get('answerID')?>"
 											<?php 	
-												if(array_key_exists($question->__get('questionID'), $_POST)){
-													if($_POST [$question->__get('questionID')] == $answer->__get('answerID')){
-															echo 'checked="checked"';
-													}
+												if($if_checked){
+													echo 'checked="checked"';
 												}
 											?>
 									>															
-										<label for="<?php echo $answer->__get('answerID')?>"><span><span></span></span><?php echo utf8_encode($answer->__get('answer'))?></label>
+										<label <?php 
+													if($answer->__get('correct')==1 and !$if_checked){
+														echo 'class="answertrue"';
+													}elseif($answer->__get('correct')==1 and $if_checked){
+														echo 'class="answertrue"';
+														$points = $points + $question->__get('points');
+													}elseif($answer->__get('correct')==0 and $if_checked){
+														echo 'class="answerfalse"';
+													}	
+											   ?>  
+												for="<?php echo $answer->__get('answerID')?>">
+												<span><span></span></span><?php echo utf8_encode($answer->__get('answer'))?>
+										</label>
 								</div>
 								
 	
@@ -58,8 +76,7 @@ include_once 'resources/form_controller.php';
 						</div>
 					</div>
 				</div>
-				<?php }?>
-				<input type="submit" class="button" value="Auswertung">
+				<?php } //TODO Points and stuff?>
 			</form>
 		</div>
 	</div>

@@ -86,3 +86,13 @@ body {
 .img-width {
 	width:100%;
 }
+
+
+/* For result */
+.answertrue {
+    background-color: green;
+}
+
+.answerfalse {
+	background-color: red;
+}
