@@ -48,7 +48,7 @@ include_once 'resources/form_controller.php';
 					</div>
 				</div>
 				<?php }?>
-				<input type="submit" class="button" value="Auswertung">
+				<button type="submit" class="btn btn-default">Auswertung</button>
 			</form>
 		</div>
 	</div>
