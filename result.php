@@ -47,7 +47,7 @@ include_once 'resources/form_controller.php';
 										}
 								?>
 	
-								<div class="col-md-6 answered">
+								<div class="col-md-6 col-sm-12 answered">
 									<input type="radio" 
 											id="<?php echo $answer->__get('answerID')?>" 
 											name="<?php echo $question->__get('questionID')?>" 
@@ -60,15 +60,15 @@ include_once 'resources/form_controller.php';
 									disabled>															
 										<label <?php 
 													if($answer->__get('correct')==1 and !$if_checked){
-														echo 'class="answertrue col-md-12 question"';
+														echo 'class="answertrue col-md-12 col-sm-12 question"';
 													}elseif($answer->__get('correct')==1 and $if_checked){
-														echo 'class="answertrue col-md-12 question"';
+														echo 'class="answertrue col-md-12 col-sm-12 question"';
 														$points = $points + $question->__get('points');
 													}elseif($answer->__get('correct')==0 and $if_checked){
-														echo 'class="answerfalse col-md-12 question"';
+														echo 'class="answerfalse col-md-12 col-sm-12 question"';
 													}	
 											   ?>  
-												for="<?php echo $answer->__get('answerID')?>" class="col-md-12 question">
+												for="<?php echo $answer->__get('answerID')?>" class="col-md-12 col-sm-12 question">
 												<span><span></span></span><?php echo utf8_encode($answer->__get('answer'))?>
 										</label>
 								</div>

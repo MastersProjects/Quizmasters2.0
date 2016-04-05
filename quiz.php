@@ -38,11 +38,11 @@ include_once 'resources/form_controller.php';
 								<?php foreach ($question->__get('answers') as $answer){?>
 
 								<div class="col-md-6 ask">
-									<label class="col-md-12"> <input type="radio"
+									<label class="col-md-12 col-sm-12"> <input type="radio"
 										id="<?php echo $answer->__get('answerID')?>"
 										name="<?php echo $question->__get('questionID')?>"
 										value="<?php echo $answer->__get('answerID')?>"> <label
-										for="<?php echo $answer->__get('answerID')?>" class="col-md-12 question"><span><span></span>
+										for="<?php echo $answer->__get('answerID')?>" class="col-md-12 col-sm-12 question"><span><span></span>
 										</span> <?php echo utf8_encode($answer->__get('answer'))?> </label>
 							
 								</div>
