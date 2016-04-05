@@ -54,7 +54,7 @@ include_once 'resources/form_controller.php';
 													echo 'checked="checked"';
 												}
 											?>
-									>															
+									disabled>															
 										<label <?php 
 													if($answer->__get('correct')==1 and !$if_checked){
 														echo 'class="answertrue col-md-12 question"';

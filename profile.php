@@ -64,7 +64,8 @@ include_once 'resources/form_controller.php';
 					</div>
 				</div>
 				<div class="modal-footer">
-					<a href="#" class="btn btn-default" data-toggle="modal" data-target="#myModal">Passwort &auml;ndern</a>
+					<a href="#resetPasswordModal" class="btn btn-default"
+						data-toggle="modal">Passwort &auml;ndern</a>
 					<button type="submit" class="btn btn-default">&Auml;ndern</button>
 				</div>
 			</form>
@@ -74,7 +75,7 @@ include_once 'resources/form_controller.php';
 				alt="Profilbild" width="304" height="236">
 		</div>
 		<div class="col-md-12">
-		<hr />
+			<hr />
 			<h2>Konto l&ouml;schen</h2>
 		</div>
 		<div class="col-md-7">
@@ -86,7 +87,8 @@ include_once 'resources/form_controller.php';
 								l&ouml;schen? Gebe daf&uuml;r in das untere Felde Ja ein.</label>
 						</div>
 						<div class="col-md-8">
-							<input class="form-control" name="delete" type="text" placeholder="Ja">
+							<input class="form-control" name="delete" type="text"
+								placeholder="Ja">
 						</div>
 						<div class="col-md-4">
 							<button class="btn btn-danger" type="submit">L&ouml;schen!</button>
@@ -98,6 +100,54 @@ include_once 'resources/form_controller.php';
 	</div>
 	<hr />
 	<?php include_once 'resources/footer.php';?>
+
+	<div class="container">
+		<div class="modal fade" id="resetPasswordModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">
+							<i class="fa fa-times"></i>
+						</button>
+						<h4 class="modal-title">
+							<i class="fa fa-key"></i> Passwort &auml;ndern
+						</h4>
+					</div>
+					<div class="container"></div>
+					<form method="post" id="user-form"
+						action=<?php $_SERVER['PHP_SELF']?>>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="inputUsername">Passwort</label> <input type="password"
+											class="form-control" id="inputPassword" name="passwordOne"
+											placeholder="Passwort">
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="inputPassword">Passwort best&auml;tigen</label><input
+											type="password" class="form-control" name="passwordTwo"
+											id="passwordTwo" placeholder="Passwort wiederholen">
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<a href="#" data-dismiss="modal" class="btn">Abbrechen</a>
+							<button type="submit" class="btn btn-default">Passwort &auml;ndern</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>
