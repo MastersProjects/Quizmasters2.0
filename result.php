@@ -1,5 +1,8 @@
 <?php
 session_start ();
+if(!(isset($_SESSION['user']))){
+	header('location: index.php');
+}
 include_once 'database/database_infos.php';
 include_once 'database/Database.php';
 include_once 'resources/form_controller.php';
@@ -10,8 +13,8 @@ include_once 'resources/form_controller.php';
 <?php include_once 'includes/head.php'; ?>
 </head>
 <body>
-	<?php include_once 'resources/navigation.php'; ?>
-
+	<?php include_once 'resources/navigation.php'; 
+	?>
 	<div class="container">
 		<div class="col-md-12">
 			<div class="row">
@@ -76,7 +79,9 @@ include_once 'resources/form_controller.php';
 						</div>
 					</div>
 				</div>
-				<?php } //TODO Points and stuff?>
+				<?php }
+					Database::getInstance()->quizSolved($points, $user->__GET('userID'), '1', $quiz->__GET('categoryID'));
+				?>
 			</form>
 		</div>
 	</div>

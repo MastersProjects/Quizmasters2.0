@@ -42,7 +42,7 @@ class Table_USER {
       	,[Active]) VALUES (?, ?, ?, ?, ?, ?)";
 		
 		$connection = Database::getInstance ()->openConn();
-		$result = sqlsrv_query( $connection, $sql, $params);
+		sqlsrv_query( $connection, $sql, $params);
 	}
 	
 	/**

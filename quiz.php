@@ -14,13 +14,14 @@ include_once 'resources/form_controller.php';
 	<div class="container">
 		<div class="col-md-12">
 			<div class="row">
-				<img class="img-responsive img-width" alt="Test" src="img/title_small.png">
+				<img class="img-responsive img-width" alt="Test"
+					src="img/title_small.png">
 			</div>
 		</div>
 		<div class="row">
 			<form action="result.php" method="post">
 				<?php
-	
+
 				$quiz = Database::getInstance ()->createQuiz ( $_GET ['id'], $categories );
 				$_SESSION['quiz'] = serialize($quiz);
 				foreach ( $quiz->__get ( 'questions' ) as $question ) {
@@ -35,26 +36,39 @@ include_once 'resources/form_controller.php';
 						<div class="panel-body">
 							<div class="row">
 								<?php foreach ($question->__get('answers') as $answer){?>
-	
+
 								<div class="col-md-6">
-									<input type="radio" id="<?php echo $answer->__get('answerID')?>" name="<?php echo $question->__get('questionID')?>" value="<?php echo $answer->__get('answerID')?>">															
-										<label for="<?php echo $answer->__get('answerID')?>"><span><span></span></span><?php echo utf8_encode($answer->__get('answer'))?></label>
+									<input type="radio"
+										id="<?php echo $answer->__get('answerID')?>"
+										name="<?php echo $question->__get('questionID')?>"
+										value="<?php echo $answer->__get('answerID')?>"> <label
+										for="<?php echo $answer->__get('answerID')?>"><span><span></span>
+									</span> <?php echo utf8_encode($answer->__get('answer'))?> </label>
 								</div>
-								
-	
+
+
 								<?php } ?>
 							</div>
 						</div>
 					</div>
 				</div>
-				<?php }?>
-				<button type="submit" class="btn btn-default">Auswertung</button>
+				<?php } ?>
+				<div class="container">
+					<button type="submit" class="btn btn-default col-md-12"
+						id="btnSubmit">Auswertung</button>
+				</div>
+				<?php 
+				if (!(isset($_SESSION['login'])) or ($_SESSION['login'] == false)){
+					?>
+				<h6>Bitte einloggen um Quiz auszuwerten!</h6>
+				<script>document.getElementById("btnSubmit").disabled = true;</script>
+				<?php
+		}?>
 			</form>
 		</div>
 	</div>
 
 	<hr />
 	<?php include_once 'resources/footer.php';?>
-
 </body>
 </html>

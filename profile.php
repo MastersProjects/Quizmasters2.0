@@ -15,7 +15,6 @@ include_once 'resources/form_controller.php';
 <body>
 	<?php
 	include_once 'resources/navigation.php';
-	$user = unserialize ( $_SESSION ['user'] );
 	?>
 	<div class="container">
 		<div class="col-md-12">
