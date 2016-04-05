@@ -37,15 +37,6 @@ include_once 'resources/form_controller.php';
 							<div class="row">
 								<?php foreach ($question->__get('answers') as $answer){?>
 
-<<<<<<< HEAD
-								<div class="col-md-6">
-									<input type="radio"
-										id="<?php echo $answer->__get('answerID')?>"
-										name="<?php echo $question->__get('questionID')?>"
-										value="<?php echo $answer->__get('answerID')?>"> <label
-										for="<?php echo $answer->__get('answerID')?>"><span><span></span>
-									</span> <?php echo utf8_encode($answer->__get('answer'))?> </label>
-=======
 								<div class="col-md-6 ask">
 									<label class="col-md-12"> <input type="radio"
 										id="<?php echo $answer->__get('answerID')?>"
@@ -53,8 +44,7 @@ include_once 'resources/form_controller.php';
 										value="<?php echo $answer->__get('answerID')?>"> <label
 										for="<?php echo $answer->__get('answerID')?>" class="col-md-12 question"><span><span></span>
 										</span> <?php echo utf8_encode($answer->__get('answer'))?> </label>
-								
->>>>>>> branch 'master' of https://github.com/MastersProjects/Quizmasters2.0.git
+							
 								</div>
 
 
