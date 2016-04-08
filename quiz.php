@@ -23,6 +23,7 @@ include_once 'resources/form_controller.php';
 				<?php
 
 				$quiz = Database::getInstance ()->createQuiz ( $_GET ['id'], $categories );
+				$lastId = Database::getInstance ()->getLastId();
 				$_SESSION['quiz'] = serialize($quiz);
 				foreach ( $quiz->__get ( 'questions' ) as $question ) {
 					?>

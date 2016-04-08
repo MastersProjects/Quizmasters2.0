@@ -134,6 +134,7 @@ class Database {
 	public function registration($username, $firstname, $lastname, $email, $password) {
 		if(!($this->checkUser($username))){
 			$res = $this->TABLE_USER->registration($this->test_input($username), $this->test_input($firstname), $this->test_input($lastname), $this->test_input($email), md5($this->test_input($password)));
+			var_dump($this->getLastId());
 			$this->closeConn();
 			$this->login($username, $password);
 			return true;
@@ -277,5 +278,16 @@ class Database {
 	//Getter
 	public function getServerName(){
 		return $this->serverName;
+	}
+	
+	/**
+	 * Get the last ID created in current Connection
+	 * USE BEFORE CLOSING CONNECTION!!
+	 */
+	public function getLastId(){
+		$query = "SELECT @@IDENTITY";			
+		$stmt = sqlsrv_query ($this->connection, $query);
+		$result = sqlsrv_fetch_array ($stmt);
+		return $result[''];
 	}
 }
