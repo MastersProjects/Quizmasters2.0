@@ -3,11 +3,13 @@ require_once 'Table_ANSWER.php';
 require_once 'Table_CATEGORY.php';
 require_once 'Table_QUESTION.php';
 require_once 'Table_SOLVED_QUIZ.php';
+require_once 'Table_SOLVED_QUIZ_QUESTION.php';
 require_once 'Table_USER.php';
 require_once '/../model/User.php';
 require_once '/../model/Quiz.php';
 require_once '/../model/Question.php';
 require_once '/../model/Answer.php';
+require_once '/../model/AnsweredQuestion.php';
 
 /**
  * This is the controller between the the Database and the modell classes.
@@ -24,6 +26,7 @@ class Database {
 	private $TABLE_CATEGORY;
 	private $TABLE_QUESTION;
 	private $TABLE_SOLVED_QUIZ;
+	private $TABLE_SOLVED_QUIZ_QUESTION;
 	private $TABLE_USER;
 	
 	private function __construct() {
@@ -31,6 +34,7 @@ class Database {
 		$this->TABLE_CATEGORY = new Table_CATEGORY();
 		$this->TABLE_QUESTION = new Table_QUESTION();
 		$this->TABLE_SOLVED_QUIZ = new Table_SOLVED_QUIZ();
+		$this->TABLE_SOLVED_QUIZ_QUESTION = new Table_SOLVED_QUIZ_QUESTION();
 		$this->TABLE_USER = new Table_USER();
 	}
 	
@@ -134,7 +138,6 @@ class Database {
 	public function registration($username, $firstname, $lastname, $email, $password) {
 		if(!($this->checkUser($username))){
 			$res = $this->TABLE_USER->registration($this->test_input($username), $this->test_input($firstname), $this->test_input($lastname), $this->test_input($email), md5($this->test_input($password)));
-			var_dump($this->getLastId());
 			$this->closeConn();
 			$this->login($username, $password);
 			return true;
@@ -271,6 +274,7 @@ class Database {
 	
 	public function quizSolved($points, $userID, $gameMode, $categoryID){
 		$result = $this->TABLE_SOLVED_QUIZ->quizSolved($points, $userID, $gameMode, $categoryID);
+		$solved_quiz_id = $this->getLastId();
 		var_dump($result);
 		$this->closeConn();
 	}
@@ -285,9 +289,12 @@ class Database {
 	 * USE BEFORE CLOSING CONNECTION!!
 	 */
 	public function getLastId(){
-		$query = "SELECT @@IDENTITY";			
-		$stmt = sqlsrv_query ($this->connection, $query);
-		$result = sqlsrv_fetch_array ($stmt);
+		$result = null;
+		if($this->connection != null){
+			$query = "SELECT @@IDENTITY";			
+			$stmt = sqlsrv_query ($this->connection, $query);
+			$result = sqlsrv_fetch_array ($stmt);
+		}
 		return $result[''];
 	}
 }

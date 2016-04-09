@@ -6,6 +6,7 @@ if(!(isset($_SESSION['user']))){
 include_once 'database/database_infos.php';
 include_once 'database/Database.php';
 include_once 'resources/form_controller.php';
+require_once 'model/AnsweredQuestion.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,6 +27,7 @@ include_once 'resources/form_controller.php';
 				<?php
 				$quiz = unserialize($_SESSION['quiz']);	
 				$points = 0;
+				$answeredQuestions = array();
 				foreach ( $quiz->__get ( 'questions' ) as $question ) {
 					?>
 				<div class="col-md-12">
@@ -59,14 +61,24 @@ include_once 'resources/form_controller.php';
 											?>
 									disabled>															
 										<label <?php 
+													
 													if($answer->__get('correct')==1 and !$if_checked){
 														echo 'class="answertrue col-md-12 col-sm-12 question"';
 													}elseif($answer->__get('correct')==1 and $if_checked){
 														echo 'class="answertrue col-md-12 col-sm-12 question"';
-														$points = $points + $question->__get('points');
+														$points = $points + $question->__get('points');	
+														$answeredQuestion = new AnsweredQuestion();
+														$answeredQuestion->__set('questionID', $question->__get('questionID'));
+														$answeredQuestion->__set('answeredRight', 1);
+														array_push($answeredQuestions, $answeredQuestion);
 													}elseif($answer->__get('correct')==0 and $if_checked){
 														echo 'class="answerfalse col-md-12 col-sm-12 question"';
-													}	
+														$answeredQuestion = new AnsweredQuestion();
+														$answeredQuestion->__set('questionID', $question->__get('questionID'));
+														$answeredQuestion->__set('answeredRight', 0);
+														array_push($answeredQuestions, $answeredQuestion);
+													}
+													
 											   ?>  
 												for="<?php echo $answer->__get('answerID')?>" class="col-md-12 col-sm-12 question">
 												<span><span></span></span><?php echo utf8_encode($answer->__get('answer'))?>
@@ -80,6 +92,8 @@ include_once 'resources/form_controller.php';
 					</div>
 				</div>
 				<?php }
+					//TODO Saving
+					var_dump($answeredQuestions);
 					Database::getInstance()->quizSolved($points, $user->__GET('userID'), '1', $quiz->__GET('categoryID'));
 				?>
 			</form>
