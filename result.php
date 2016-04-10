@@ -92,9 +92,8 @@ require_once 'model/AnsweredQuestion.php';
 					</div>
 				</div>
 				<?php }
-					//TODO Saving
-					var_dump($answeredQuestions);
-					Database::getInstance()->quizSolved($points, $user->__GET('userID'), '1', $quiz->__GET('categoryID'));
+					//TODO Saving WTF WHY $answeredQuestions CONTAINS 11???
+					Database::getInstance()->quizSolved($points, $user->__GET('userID'), '1', $quiz->__GET('categoryID'), $answeredQuestions);
 				?>
 			</form>
 		</div>

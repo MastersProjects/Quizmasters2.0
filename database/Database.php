@@ -272,17 +272,20 @@ class Database {
 		return $newquestions;
 	}
 	
-	public function quizSolved($points, $userID, $gameMode, $categoryID){
-		$result = $this->TABLE_SOLVED_QUIZ->quizSolved($points, $userID, $gameMode, $categoryID);
-		$solved_quiz_id = $this->getLastId();
-		var_dump($result);
+	public function quizSolved($points, $userID, $gameMode, $categoryID, $answeredQuestions){
+		echo "quizSolved()";
+		$this->TABLE_SOLVED_QUIZ->quizSolved($points, $userID, $gameMode, $categoryID);
+		$solved_quiz_id = $this->getLastId();	
 		$this->closeConn();
+		$iterator = 0;
+		while(count($answeredQuestions)>$iterator){
+			$answeredQuestion = $answeredQuestions[$iterator];
+			$this->TABLE_SOLVED_QUIZ_QUESTION->questionSolved($answeredQuestion->__get('answeredRight'), $solved_quiz_id, $answeredQuestion->__get('questionID'));
+			$this->closeConn();
+			$iterator = $iterator +1;
+		}
 	}
-	
-	//Getter
-	public function getServerName(){
-		return $this->serverName;
-	}
+
 	
 	/**
 	 * Get the last ID created in current Connection
@@ -296,5 +299,10 @@ class Database {
 			$result = sqlsrv_fetch_array ($stmt);
 		}
 		return $result[''];
+	}
+	
+	//Getter
+	public function getServerName(){
+		return $this->serverName;
 	}
 }

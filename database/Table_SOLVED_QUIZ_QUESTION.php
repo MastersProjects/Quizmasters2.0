@@ -8,18 +8,17 @@ require_once 'Database.php';
  * Quizmasters 2.0 2016
  */
 class Table_SOLVED_QUIZ_QUESTION {
-	public function quizSolved($points, $userID, $gameMode, $categoryID){
-		$params = array($points, $userID, $gameMode, $categoryID);
-		var_dump($params);
-		$sql = "INSERT INTO [dbo].[SOLVED_QUIZ]
-		([Points]
-		,[User_ID]
-		,[Gamemode_ID]
-		,[Category_ID])
-		VALUES (?, ?, ?, ?)";
-
+	
+	public function questionSolved($answeredRight, $solvedQuizID, $questionID){
+		$params = array($solvedQuizID, $questionID, $answeredRight);
+		$sql = "INSERT INTO [dbo].[SOLVED_QUIZ_QUESTION]
+		([SolvedQuiz_ID]
+		,[Question_ID]
+		,[Answered_right])
+		VALUES (?, ?, ?)";
+	
 		$connection = Database::getInstance ()->openConn();
-		$result = sqlsrv_query( $connection, $sql, $params);
-		return $result;
+		sqlsrv_query($connection, $sql, $params);
+		
 	}
 }
