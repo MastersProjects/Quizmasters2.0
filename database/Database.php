@@ -273,7 +273,6 @@ class Database {
 	}
 	
 	public function quizSolved($points, $userID, $gameMode, $categoryID, $answeredQuestions){
-		echo "quizSolved()";
 		$this->TABLE_SOLVED_QUIZ->quizSolved($points, $userID, $gameMode, $categoryID);
 		$solved_quiz_id = $this->getLastId();	
 		$this->closeConn();
