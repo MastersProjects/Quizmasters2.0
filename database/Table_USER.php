@@ -95,4 +95,12 @@ class Table_USER {
 		$params = array($username);
 		$stmt = sqlsrv_query ( $connection, $sql, $params);
 	}
+	
+	public function getRanking(){
+		//TODO @zperee Query Must be: ¦ ID_User ¦ Username ¦ Points ¦
+		$sql ="";
+		$connection = Database::getInstance ()->openConn();
+		$stmt = sqlsrv_query ( $connection, $query, $params);		
+		return($stmt);
+	}
 }
