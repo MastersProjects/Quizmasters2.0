@@ -2,10 +2,12 @@
 
 <title>QuizMasters 2.0</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta
+	name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
+<link
+	rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 <!-- Latest compiled and minified jQuery -->
@@ -17,14 +19,23 @@
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <!-- FontAwesome icon stylesheet -->
-<link rel="stylesheet"
+<link
+	rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 <!-- Custom CSS -->
-<link rel="stylesheet" href="style/custom.css">
-
-  <script src="//code.jquery.com/jquery-1.9.1.js"></script>
-  <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+<link rel="stylesheet"
+	href="style/custom.css">
 
 <script
-	src="js/validate.js"></script>
+	src="//code.jquery.com/jquery-1.9.1.js"></script>
+<script
+	src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+
+<script src="js/validate.js"></script>
+
+<!-- SweetAlerts -->
+<script
+	src="dist/sweetalert.min.js"></script>
+<link
+	rel="stylesheet" type="text/css" href="dist/sweetalert.css">

@@ -2,7 +2,7 @@
 session_start ();
 include_once 'database/database_infos.php';
 include_once 'database/Database.php';
-include_once 'resources/form_controller.php';
+;
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,7 +10,9 @@ include_once 'resources/form_controller.php';
 <?php include_once 'includes/head.php'; ?>
 </head>
 <body>
-	<?php include_once 'resources/navigation.php'; ?>
+	<?php include_once 'resources/navigation.php';
+	include_once 'resources/form_controller.php';
+	?>
 	<div class="container">
 		<div class="col-md-10">
 			<div class="row">
@@ -36,24 +38,34 @@ include_once 'resources/form_controller.php';
 			$rand1 = 0;
 			$rand2 = 0;
 			while($rand1 == $rand2){
-			$rand1 = rand(0, $count_cat);
-			$rand2 = rand(0, $count_cat);
+				$rand1 = rand(0, $count_cat);
+				$rand2 = rand(0, $count_cat);
 			if($rand1 != $rand2){?>
 			<div class="row">
 				<div class="col-xs-6 col-sm-3">
-					<img class="img-responsive" alt="Image Category" src="<?php echo $categories[$rand1]->__get('img_path');?>">
+					<img class="img-responsive" alt="Image Category"
+						src="<?php echo $categories[$rand1]->__get('img_path');?>">
 				</div>
 				<div class="col-xs-6 col-sm-3">
-					<h3><?php echo $categories[$rand1]->__get('category')?></h3>
-					<p><?php echo $categories[$rand1]->__get('description');?></p>
+					<h3>
+						<?php echo $categories[$rand1]->__get('category')?>
+					</h3>
+					<p>
+						<?php echo $categories[$rand1]->__get('description');?>
+					</p>
 				</div>
 				<div class="clearfix visible-xs"></div>
 				<div class="col-xs-6 col-sm-3">
-					<img class="img-responsive" alt="Image Category" src="<?php echo $categories[$rand2]->__get('img_path');?>">
+					<img class="img-responsive" alt="Image Category"
+						src="<?php echo $categories[$rand2]->__get('img_path');?>">
 				</div>
 				<div class="col-xs-6 col-sm-3">
-					<h3><?php echo $categories[$rand2]->__get('category')?></h3>
-					<p><?php echo $categories[$rand2]->__get('description');?></p>
+					<h3>
+						<?php echo $categories[$rand2]->__get('category')?>
+					</h3>
+					<p>
+						<?php echo $categories[$rand2]->__get('description');?>
+					</p>
 				</div>
 			</div>
 			<?php }

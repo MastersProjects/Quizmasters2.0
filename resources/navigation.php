@@ -54,7 +54,7 @@
 						class="fa fa-user-plus"></i> Sign Up</a>
 				</li>
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"><i class="fa fa-sign-in"></i>Login<span
+					data-toggle="dropdown" href="#"><i class="fa fa-sign-in"></i> Login<span
 						class="caret"></span> </a>
 					<ul class="dropdown-menu login-menu">
 						<li>
