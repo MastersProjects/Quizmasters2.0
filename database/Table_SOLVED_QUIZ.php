@@ -21,4 +21,15 @@ class Table_SOLVED_QUIZ {
 		sqlsrv_query($connection, $sql, $params);
 		
 	}
+	
+	public function getPointsUser($userId){
+		$params = array($userId);
+		$sql = "SELECT SUM(points) as points
+		FROM [dbo].[SOLVED_QUIZ] 
+		WHERE [User_ID] = ?";
+		
+		$connection = Database::getInstance ()->openConn();
+		$result = sqlsrv_query($connection, $sql, $params);
+		return $result;
+	}
 }

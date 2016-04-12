@@ -97,13 +97,16 @@ class Database {
 		$result = $this->TABLE_USER->getUser($this->test_input($username));
  		$result = sqlsrv_fetch_array ($result);
  		
- 		$this->closeConn();
 		if($result['Password'] == md5($password)){
 			$user = new User($result['Username'], $result['Firstname'], $result['Lastname'], $result['ID_User'], $result['Email'], $result['Profile_Img']);
+			$this->closeConn();
+			
+			$user->__SET('points', $this->getPointsUser($user->__GET('userID')));
 			$_SESSION['login'] = true;
 			$_SESSION['user'] = serialize($user);
 			return true;
 		} else {
+			$this->closeConn();
 			return false;
 		}
 	}
@@ -194,8 +197,17 @@ class Database {
 		$this->closeConn();
 	}
 	
+	public function getPointsUser($userId){
+		$result = $this->TABLE_SOLVED_QUIZ->getPointsUser($userId);
+		$result = sqlsrv_fetch_array($result);
+		$points = $result['points'];
+		$this->closeConn();
+		return $points;
+	}
+	
 	/**
-	 * 
+	 * Get all categories from Database
+	 * @return array with categories
 	 */
 	public function getAllCategories(){
 		$result = $this->TABLE_CATEGORY->getAllCategories();
