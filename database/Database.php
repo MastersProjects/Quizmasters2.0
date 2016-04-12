@@ -322,14 +322,19 @@ class Database {
 	 */
 	public function getRanking(){
 		$result = $this->TABLE_USER->getRanking();
-		$rankingList = array();		
+		$rankingList = array();	
+		$iterator = 1;	
 		while ($rs = sqlsrv_fetch_array($result)){
 			$ranking = array();
-			array_push($ranking, $rs['ID_User']);
+			array_push($ranking, $iterator);
 			array_push($ranking, $rs['Username']);
 			array_push($ranking, $rs['Points']);
 			
 			array_push($rankingList, $ranking);
+			$iterator = $iterator + 1;
+			
 		}
+		$this->closeConn();
+		return $rankingList;
 	}
 }

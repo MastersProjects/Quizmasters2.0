@@ -94,7 +94,7 @@ require_once 'model/AnsweredQuestion.php';
 			<?php }
 			Database::getInstance()->quizSolved($points, $user->__GET('userID'), '1', $quiz->__GET('categoryID'), $answeredQuestions);
 			$user->__SET('points', $user->__GET('points') + $points);
-
+			$_SESSION['user'] = serialize($user);
 			?>
 		</div>
 		<div class="col-md-12">

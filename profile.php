@@ -5,7 +5,6 @@ if(!(isset($_SESSION['user']))){
 }
 include_once 'database/database_infos.php';
 include_once 'database/Database.php';
-include_once 'resources/form_controller.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,11 +13,13 @@ include_once 'resources/form_controller.php';
 </head>
 <body>
 	<?php
+	include_once 'resources/form_controller.php';
 	include_once 'resources/navigation.php';
 	?>
 	<div class="container">
 		<div class="col-md-12">
 			<h1>Dein Profil</h1>
+			<hr>
 		</div>
 		<div class="col-md-8">
 			<form method="post" id="profile-form" action=#>
@@ -114,15 +115,15 @@ include_once 'resources/form_controller.php';
 						</h4>
 					</div>
 					<div class="container"></div>
-					<form method="post" id="user-form"
+					<form method="post" id="passwordChange-form"
 						action=<?php $_SERVER['PHP_SELF']?>>
 						<div class="modal-body">
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
-										<label for="inputUsername">Passwort</label> <input type="password"
-											class="form-control" id="inputPassword" name="passwordOne"
-											placeholder="Passwort">
+										<label for="inputUsername">Passwort</label> <input
+											type="password" class="form-control" id="inputPassword"
+											name="passwordOneUpdate" placeholder="Passwort">
 									</div>
 								</div>
 							</div>
@@ -132,7 +133,7 @@ include_once 'resources/form_controller.php';
 									<div class="form-group">
 										<label for="inputPassword">Passwort best&auml;tigen</label><input
 											type="password" class="form-control" name="passwordTwo"
-											id="passwordTwo" placeholder="Passwort wiederholen">
+											id="passwordTwoUpdate" placeholder="Passwort wiederholen">
 									</div>
 								</div>
 							</div>
@@ -140,7 +141,8 @@ include_once 'resources/form_controller.php';
 						</div>
 						<div class="modal-footer">
 							<a href="#" data-dismiss="modal" class="btn">Abbrechen</a>
-							<button type="submit" class="btn btn-default">Passwort &auml;ndern</button>
+							<button type="submit" class="btn btn-default">Passwort
+								&auml;ndern</button>
 						</div>
 					</form>
 				</div>

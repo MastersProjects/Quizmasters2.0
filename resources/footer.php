@@ -1,4 +1,3 @@
-<?php $_SESSION['user'] = serialize($user);?>
 <section id="footer" class="navbar-bottom">
 	<div class="container text-center">
 		<div class="col-md-4">
