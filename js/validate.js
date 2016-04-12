@@ -62,19 +62,19 @@ $(function() {
         
         // Specify the validation rules
         rules: {
-        	username: {
+        	usernameUpdate: {
         		required: true,
         		maxlength: 45
         	},
-            firstname: {
+            firstnameUpdate: {
         		required: true,
         		maxlength: 45
         	},
-            lastname: {
+            lastnameUpdate: {
         		required: true,
         		maxlength: 45
         	},
-            email: {
+            emailUpdate: {
                 required: true,
                 email: true
             }
@@ -83,21 +83,50 @@ $(function() {
         
         // Specify the validation error messages
         messages: {
-        	username: {
+        	usernameUpdate: {
         		required: "Username bitte ausf&uuml;llen",
         		maxlength: "Username zu lang"
         	},
-            firstname: {
+            firstnameUpdate: {
         		required: "Vorname bitte ausf&uuml;llen",
         		maxlength: "Vorname zu lang"
         	},
-            lastname: {
+            lastnameUpdate: {
         		required: "Nachname bitte ausf&uuml;llen",
         		maxlength: "Nachname zu lang"
         	},
-            email: "Bitte g&uuml;ltige Email eintragen",
+            emailUpdate: "Bitte g&uuml;ltige Email eintragen",
         },
         
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+  });
+
+$(function() {
+    $("#passwordChange-form").validate({
+        
+        // Specify the validation rules
+        rules: {
+        	 passwordOneUpdate: {
+                 required: true,
+                 minlength: 5
+             },
+             passwordTwoUpdate: {
+             	equalTo: "#passwordOneUpdate"
+             },      
+        },
+        
+        // Specify the validation error messages
+        messages: {
+        	passwordOneUpdate: {
+                required: "Passwort ausf&uuml;llen",
+                minlength: "Password muss mindesten 5 Zeichen lang sein"
+            },
+            passwordTwoUpdate: "Passw&ouml;rter stimmen nicht &uuml;berein",
+        },
         submitHandler: function(form) {
             form.submit();
         }

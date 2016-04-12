@@ -5,10 +5,10 @@ if ($_POST) {
 		$login = Database::getInstance ()->login ( $_POST ['userLogin'], $_POST ['passwordLogin'] );
 		if ($login == false) {
 			// When the login fails
-			echo '<script type="text/javascript">sweetAlert("Login fehlgeschlagen!", "Username und Password stimmen nicht \u00fcberein!", "error");</script>';
+			echo '<script type="text/javascript">swal("Login fehlgeschlagen!", "Username und Password stimmen nicht \u00fcberein!", "error");</script>';
 		} else {
 			// When the login succeeds
-			echo '<script type="text/javascript">sweetAlert("Erfolgreich!", "Login war erfolgreich!", "success");</script>';
+			echo '<script type="text/javascript">swal("Erfolgreich!", "Login war erfolgreich!", "success");</script>';
 		}
 	}
 
@@ -17,10 +17,10 @@ if ($_POST) {
 		$result = Database::getInstance ()->registration ( $_POST ['username'], $_POST ['firstname'], $_POST ['lastname'], $_POST ['email'], $_POST ['passwordOne'] );
 		if (! ($result)) {
 			// When registration fails, username already in db
-			echo '<script type="text/javascript">sweetAlert("Fehler!", "Username bereits vorhanden!", "error");</script>';
+			echo '<script type="text/javascript">swal("Fehler!", "Username bereits vorhanden!", "error");</script>';
 		} else {
 			// When registration succeeds
-			echo '<script type="text/javascript">sweetAlert("Erfolgreich!", "Du hast dich erfolgreich registriert und wurdest angemeldet!", "success");</script>';
+			echo '<script type="text/javascript">swal("Erfolgreich!", "Du hast dich erfolgreich registriert und wurdest angemeldet!", "success");</script>';
 		}
 	}
 
@@ -35,15 +35,15 @@ if ($_POST) {
 		$result = Database::getInstance ()->userUpdate ( $_POST ['usernameUpdate'], $_POST ['firstnameUpdate'], $_POST ['lastnameUpdate'], $_POST ['emailUpdate'] );
 		// When change fails, username already in db
 		if (! ($result)) {
-			echo '<script type="text/javascript">sweetAlert("Fehler!", "Username bereits vorhanden!", "error");</script>';
+			echo '<script type="text/javascript">swal("Fehler!", "Username bereits vorhanden!", "error");</script>';
 		} else {
 			// When change succeeds
-			echo '<script type="text/javascript">sweetAlert("Erfolgreich!", "Deine Daten wurden angepasst!", "success");</script>';
+			echo '<script type="text/javascript">swal("Erfolgreich!", "Deine Daten wurden angepasst!", "success");</script>';
 		}
 	}
 	if (isset ( $_POST ['password1Update'] ) && (isset ( $_POST ['password2Update'] ))) {
 		Database::getInstance ()->changePwd ( $_POST ['password1Update'] );
-		echo '<script type="text/javascript">sweetAlert("Erfolgreich!", "Dein Passwort wurde erfolgreich geändert!", "success");</script>';
+		echo '<script type="text/javascript">swal("Erfolgreich!", "Dein Passwort wurde erfolgreich geändert!", "success");</script>';
 	}
 }
 

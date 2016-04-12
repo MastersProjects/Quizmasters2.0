@@ -97,10 +97,16 @@ class Table_USER {
 	}
 	
 	public function getRanking(){
-		//TODO @zperee Query Must be: ¦ ID_User ¦ Username ¦ Points ¦
-		$sql ="";
+		$query = "SELECT TOP 10 
+		[dbo].[USER].[Username], sum([sq].[Points]) as Points
+		FROM [dbo].[USER]
+		JOIN [dbo].[SOLVED_QUIZ] as sq 
+		ON [USER].[ID_User] = sq.user_id
+		WHERE [dbo].[USER].[active] = '1'
+		GROUP BY [dbo].[USER].[ID_User], [dbo].[USER].[Username]
+		ORDER BY Points DESC";
 		$connection = Database::getInstance ()->openConn();
-		$stmt = sqlsrv_query ( $connection, $query, $params);		
+		$stmt = sqlsrv_query ( $connection, $query);		
 		return($stmt);
 	}
 }

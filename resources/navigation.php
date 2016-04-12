@@ -45,7 +45,7 @@
 					</ul>
 				</li>
 				<?php }?>
-				<li><a href="#">Rangliste</a>
+				<li><a href="rangliste.php">Rangliste</a>
 				</li>
 			</ul>
 			<?php if (!(isset($_SESSION['login'])) or ($_SESSION['login'] == false)){ ?>

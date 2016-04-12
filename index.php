@@ -2,7 +2,6 @@
 session_start ();
 include_once 'database/database_infos.php';
 include_once 'database/Database.php';
-;
 ?>
 <!DOCTYPE html>
 <html>
