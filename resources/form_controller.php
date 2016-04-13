@@ -9,7 +9,7 @@ if ($_POST) {
 		} else {
 			// When the login succeeds
 			echo '<script type="text/javascript">swal("Erfolgreich!", "Login war erfolgreich!", "success");</script>';
-		}
+header("Location: " . "http://" . $_SERVER['HTTP_HOST'] . $location);		}
 	}
 
 	// For registration

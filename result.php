@@ -5,7 +5,6 @@ if(!(isset($_SESSION['user']))){
 }
 include_once 'database/database_infos.php';
 include_once 'database/Database.php';
-include_once 'resources/form_controller.php';
 require_once 'model/AnsweredQuestion.php';
 ?>
 <!DOCTYPE html>
@@ -14,7 +13,8 @@ require_once 'model/AnsweredQuestion.php';
 <?php include_once 'includes/head.php'; ?>
 </head>
 <body>
-	<?php include_once 'resources/navigation.php'; 
+	<?php include_once 'resources/form_controller.php';
+	include_once 'resources/navigation.php'; 
 	?>
 	<div class="container">
 		<div class="col-md-12">

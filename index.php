@@ -9,8 +9,8 @@ include_once 'database/Database.php';
 <?php include_once 'includes/head.php'; ?>
 </head>
 <body>
-	<?php include_once 'resources/navigation.php';
-	include_once 'resources/form_controller.php';
+	<?php include_once 'resources/form_controller.php'; 
+	include_once 'resources/navigation.php';
 	?>
 	<div class="container">
 		<div class="col-md-10">

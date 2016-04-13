@@ -2,7 +2,6 @@
 session_start ();
 include_once 'database/database_infos.php';
 include_once 'database/Database.php';
-include_once 'resources/form_controller.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,7 +9,8 @@ include_once 'resources/form_controller.php';
 <?php include_once 'includes/head.php'; ?>
 </head>
 <body>
-	<?php include_once 'resources/navigation.php'; ?>
+	<?php include_once 'resources/form_controller.php';
+	include_once 'resources/navigation.php'; ?>
 	<div class="container">
 		<div class="col-md-12">
 			<div class="row">
