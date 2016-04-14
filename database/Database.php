@@ -130,6 +130,20 @@ class Database {
 	}
 	
 	/**
+	 * Function to get a user from the database
+	 * @param  $username
+	 */
+	public function getUser($username) {
+		$result = $this->TABLE_USER->getUser($username);
+		$result = sqlsrv_fetch_array ($result);
+		$user = new User($result['Username'], $result['Firstname'], $result['Lastname'], $result['ID_User'], $result['Email'], $result['Profile_Img']);
+		$this->closeConn();
+		$user->__SET('points', $this->getPointsUser($user->__GET('userID')));
+		return $user;
+	}
+	
+	
+	/**
 	 * function for the registration
 	 * @param $username
 	 * @param $firstname
