@@ -3,7 +3,7 @@
 		<div class="col-md-4">
 			<h3>About</h3>
 			<p>
-				<a href="#">&Uuml;ber uns</a>
+				<a href="about.php">&Uuml;ber uns</a>
 			</p>
 			<p>
 				<a href="#">Kontakt</a>
