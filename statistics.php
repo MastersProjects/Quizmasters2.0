@@ -45,7 +45,7 @@ $pointsQuiz = Database::getInstance()->getPointsQuiz($user->__get('userID'));
 
           var options = {
             title: 'Punkte Entwicklung pro Quiz',
-            hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+            hAxis: {title: 'Quiz',  titleTextStyle: {color: '#333'}},
             vAxis: {minValue: 0}
           };
           var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
@@ -60,6 +60,9 @@ $pointsQuiz = Database::getInstance()->getPointsQuiz($user->__get('userID'));
 		<div class="col-md-12">
 			<h1>Dein Statistiken</h1>
 			<hr>
+		</div>
+		<div class="col-md-12">
+			<h3><?php echo "Dein Punktzahl: " . $user->__get('points') . " Punkte";?></h3>
 		</div>
 		<div class="col-md-6">
 			<div id="piechart" style="width: auto; height: 350px;"></div>
