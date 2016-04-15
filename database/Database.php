@@ -351,4 +351,34 @@ class Database {
 		$this->closeConn();
 		return $rankingList;
 	}
+	
+	/**
+	 * Get Array for statistic with number of 
+	 * correct and false answered questions
+	 * @param $userID
+	 */
+	public function getRightFalse($userID){
+		$result = $this->TABLE_SOLVED_QUIZ_QUESTION->getFalseRight($userID);
+		$result = sqlsrv_fetch_array($result);
+		$rightFalse = array();
+		array_push($rightFalse, $result['true']);
+		array_push($rightFalse, $result['false']);
+		$this->closeConn();
+		return $rightFalse;
+	}
+	
+	public function getPointsQuiz($userID){
+		$result = $this->TABLE_SOLVED_QUIZ->getPointsQuiz($userID);
+		$pointsQuiz = array();
+		$iterator = 1;
+		while ($rs = sqlsrv_fetch_array($result)){
+			$quiz = array();
+			array_push($quiz, $iterator);
+			array_push($quiz, $rs['Points']);
+			array_push($pointsQuiz, $quiz);	
+			$iterator = $iterator + 1;
+		}
+		$this->closeConn();
+		return $pointsQuiz;
+	}
 }

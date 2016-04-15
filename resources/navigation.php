@@ -39,7 +39,7 @@
 					<ul class="dropdown-menu">
 						<li><a href="profile.php">Profil</a>
 						</li>
-						<li><a href="#">Statistik</a>
+						<li><a href="statistics.php">Statistik</a>
 						</li>
 						<!-- <li><a href="#">Abzeichen</a></li> -->
 					</ul>

@@ -32,4 +32,16 @@ class Table_SOLVED_QUIZ {
 		$result = sqlsrv_query($connection, $sql, $params);
 		return $result;
 	}
+	
+	public function getPointsQuiz($userID){
+		$params = array($userID);
+		$sql = "SELECT [Points]
+		FROM [dbo].[SOLVED_QUIZ]
+		WHERE [User_ID] = ?
+		ORDER BY [ID_SolvedQuiz]";
+		
+		$connection = Database::getInstance ()->openConn();
+		$result = sqlsrv_query($connection, $sql, $params);
+		return $result;
+	}
 }
