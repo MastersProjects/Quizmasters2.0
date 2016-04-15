@@ -1,5 +1,6 @@
 <?php
 session_start ();
+$_SESSION['solved'] = false;
 include_once 'database/database_infos.php';
 include_once 'database/Database.php';
 ?>

@@ -15,6 +15,7 @@ include_once 'database/Database.php';
 	<?php
 	include_once 'resources/form_controller.php';
 	include_once 'resources/navigation.php';
+
 	?>
 	<div class="container">
 		<div class="col-md-12">
@@ -72,7 +73,7 @@ include_once 'database/Database.php';
 		</div>
 		<div class="col-md-4">
 			<img src="<?php echo $user->__GET('profile_img'); ?>"
-				alt="Profilbild" width="304" height="236">
+				alt="Profilbild" width="304" height="236">	
 		</div>
 		<div class="col-md-12">
 			<hr />

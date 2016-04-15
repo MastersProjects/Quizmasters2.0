@@ -3,6 +3,16 @@ session_start ();
 if(!(isset($_SESSION['user']))){
 	header('location: index.php');
 }
+// if(isset ($_SESSION['lastResult'])){
+// 	$date = new DateTime();
+// 	if((abs($date->getTimestamp() - $_SESSION['lastResult'] )) < 90){
+// 		header('location: index.php');
+// 	} else {
+// 	$date = new DateTime();
+// 	$_SESSION['lastResult'] = $date->getTimestamp();
+// 	}
+// }
+
 include_once 'database/database_infos.php';
 include_once 'database/Database.php';
 require_once 'model/AnsweredQuestion.php';
@@ -14,7 +24,7 @@ require_once 'model/AnsweredQuestion.php';
 </head>
 <body>
 	<?php include_once 'resources/form_controller.php';
-	include_once 'resources/navigation.php'; 
+	include_once 'resources/navigation.php';
 	?>
 	<div class="container">
 		<div class="col-md-12">
@@ -92,9 +102,14 @@ require_once 'model/AnsweredQuestion.php';
 				</div>
 			</div>
 			<?php }
+			if($_SESSION['solved'] == true){
+				echo '<script type="text/javascript">swal("Achtung!", "Quiz wurde schon ausgerwetet!", "error");</script>';
+				} else{
 			Database::getInstance()->quizSolved($points, $user->__GET('userID'), '1', $quiz->__GET('categoryID'), $answeredQuestions);
 			$user->__SET('points', $user->__GET('points') + $points);
 			$_SESSION['user'] = serialize($user);
+			$_SESSION['solved'] = true;
+				}
 			?>
 		</div>
 		<div class="col-md-12">
@@ -107,7 +122,9 @@ require_once 'model/AnsweredQuestion.php';
 
 			<div class="progress">
 				<div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $countRight * 10?>"
-					aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $countRight * 10 . "%"?>"><?php echo $countRight * 10 . "%"?></div>
+					aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $countRight * 10 . "%"?>">
+					<?php echo $countRight * 10 . "%"?>
+				</div>
 			</div>
 			<h6>Richtig beantwortet</h6>
 
