@@ -14,8 +14,23 @@ include_once 'database/Database.php';
 	$result = Database::getInstance()->getRanking();
 	?>
 	<div class="container">
-		<div class="col-md-12"></div>
+		<div class="col-md-6">
 		<h1>Top 10</h1>
+		</div>
+		 <div class="col-md-6">
+            <div id="search_container"> 
+            <form action="<?php $_SERVER['PHP_SELF']?>" method="POST">
+                <div class="input-group stylish-input-group">
+                    <input type="text" class="form-control"  placeholder="Search" name="search" >
+                    <span class="input-group-addon">
+                        <button type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>  
+                    </span>
+                </div>
+                </form>
+            </div>
+        </div>
 		<hr>
 		<table class="table table-striped table-hover">
 			<thead>

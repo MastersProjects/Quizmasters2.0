@@ -9,7 +9,7 @@ if ($_POST) {
 		} else {
 			// When the login succeeds
 			echo '<script type="text/javascript">swal("Erfolgreich!", "Login war erfolgreich!", "success");</script>';
-header("Location: " . "http://" . $_SERVER['HTTP_HOST'] . $location);		}
+		}
 	}
 
 	// For registration
@@ -44,6 +44,10 @@ header("Location: " . "http://" . $_SERVER['HTTP_HOST'] . $location);		}
 	if (isset ( $_POST ['password1Update'] ) && (isset ( $_POST ['password2Update'] ))) {
 		Database::getInstance ()->changePwd ( $_POST ['password1Update'] );
 		echo '<script type="text/javascript">swal("Erfolgreich!", "Dein Passwort wurde erfolgreich geändert!", "success");</script>';
+	}
+	
+	if (isset ( $_POST ['search'] )) {
+		header ( 'location: user.php?username='.$_POST['search'] );
 	}
 }
 
