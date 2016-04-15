@@ -10,14 +10,14 @@ include_once 'database/Database.php';
 </head>
 <body>
 	<?php include_once 'resources/form_controller.php';
-	include_once 'resources/navigation.php'; 
+	include_once 'resources/navigation.php';
 	$result = Database::getInstance()->getRanking();
 	?>
 	<div class="container">
 		<div class="col-md-12"></div>
 		<h1>Top 10</h1>
 		<hr>
-		<table class="table table-striped">
+		<table class="table table-striped table-hover">
 			<thead>
 				<tr>
 					<th>Rank</th>
@@ -27,10 +27,11 @@ include_once 'database/Database.php';
 			</thead>
 			<tbody>
 				<?php foreach($result as $row){
-					echo "<tr>";
+					echo "<tr onclick=document.location='user.php?username=$row[1]'>";
 					foreach($row as $column){
 						echo "<th>" . $column . "</th>";
 					}
+					echo "</tr>";
 
 			}?>
 			</tbody>
@@ -40,6 +41,5 @@ include_once 'database/Database.php';
 	</div>
 	<hr>
 	<?php include_once 'resources/footer.php';?>
-
 </body>
 </html>

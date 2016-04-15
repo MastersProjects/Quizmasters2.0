@@ -18,7 +18,7 @@ $profileUser = Database::getInstance()->getUser($username);
 	<?php if(!(empty($profileUser->__get('username')))){?>
 		<div class="col-md-12">
 			<h1>
-				<?php echo $profileUser->__get('username') ?>
+				<?php echo $profileUser->__get('username') . "'s Profil" ?>
 			</h1>
 			<hr />
 		</div>

@@ -20,11 +20,20 @@ include_once 'database/Database.php';
 		</div>
 		<div class="row">
 			<form action="result.php" method="post">
-				<?php
+			<?php
 
 				$quiz = Database::getInstance ()->createQuiz ( $_GET ['id'], $categories );
 				$lastId = Database::getInstance ()->getLastId();
 				$_SESSION['quiz'] = serialize($quiz);
+				if (!(isset($_SESSION['login'])) or ($_SESSION['login'] == false)){
+					?>?>
+				<div class="col-md-12">
+				<div class="alert alert-danger" role="alert">
+				<strong>Achtung!</strong> Quiz kann nicht ausgewertet werden wenn du
+				nicht angemeldet bist.
+				</div>
+				</div>
+				<?php }
 				foreach ( $quiz->__get ( 'questions' ) as $question ) {
 					?>
 				<div class="col-md-12">
@@ -43,9 +52,10 @@ include_once 'database/Database.php';
 										id="<?php echo $answer->__get('answerID')?>"
 										name="<?php echo $question->__get('questionID')?>"
 										value="<?php echo $answer->__get('answerID')?>"> <label
-										for="<?php echo $answer->__get('answerID')?>" class="col-md-12 col-sm-12 question"><span><span></span>
-										</span> <?php echo utf8_encode($answer->__get('answer'))?> </label>
-							
+										for="<?php echo $answer->__get('answerID')?>"
+										class="col-md-12 col-sm-12 question"><span><span></span> </span>
+											<?php echo utf8_encode($answer->__get('answer'))?> </label>
+								
 								</div>
 
 
