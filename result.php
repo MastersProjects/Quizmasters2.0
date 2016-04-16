@@ -72,8 +72,12 @@ require_once 'model/AnsweredQuestion.php';
 									disabled> <label
 									<?php
 
-									if($answer->__get('correct')==1 and !$if_checked){
+									if($answer->__get('correct')==1 and !$if_checked){ //If answered false
 										echo 'class="answertrue col-md-12 col-sm-12 question"';
+										$answeredQuestion = new AnsweredQuestion();
+										$answeredQuestion->__set('questionID', $question->__get('questionID'));
+										$answeredQuestion->__set('answeredRight', 0);
+										array_push($answeredQuestions, $answeredQuestion);
 									}elseif($answer->__get('correct')==1 and $if_checked){ //If answered right
 										echo 'class="answertrue col-md-12 col-sm-12 question"';
 										$points = $points + $question->__get('points');
@@ -84,10 +88,6 @@ require_once 'model/AnsweredQuestion.php';
 										$countRight = $countRight + 1;
 									}elseif($answer->__get('correct')==0 and $if_checked){ //If answered false
 										echo 'class="answerfalse col-md-12 col-sm-12 question"';
-										$answeredQuestion = new AnsweredQuestion();
-										$answeredQuestion->__set('questionID', $question->__get('questionID'));
-										$answeredQuestion->__set('answeredRight', 0);
-										array_push($answeredQuestions, $answeredQuestion);
 									}
 
 									?>
