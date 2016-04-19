@@ -41,6 +41,7 @@ include_once 'database/Database.php';
 				$rand2 = rand(0, $count_cat);
 			if($rand1 != $rand2){?>
 			<div class="row">
+			<a href = <?php echo "quiz.php?id=" . $categories[$rand1]->__get('categoryID');?>>
 				<div class="col-xs-6 col-sm-3">
 					<img class="img-responsive" alt="Image Category"
 						src="<?php echo $categories[$rand1]->__get('img_path');?>">
@@ -58,6 +59,8 @@ include_once 'database/Database.php';
 					<img class="img-responsive" alt="Image Category"
 						src="<?php echo $categories[$rand2]->__get('img_path');?>">
 				</div>
+			</a>
+			<a href = <?php echo "quiz.php?id=" . $categories[$rand2]->__get('categoryID');?>>
 				<div class="col-xs-6 col-sm-3">
 					<h3>
 						<?php echo $categories[$rand2]->__get('category')?>
@@ -66,12 +69,13 @@ include_once 'database/Database.php';
 						<?php echo $categories[$rand2]->__get('description');?>
 					</p>
 				</div>
+			</a>
 			</div>
 			<?php }
 			}?>
 		</div>
 		<div class="col-md-2">
-			<img src="img/ad.jpg" alt="Werbung" class="img-responsive">
+			<img src="img/ad1.png" alt="Werbung" class="img-responsive">
 		</div>
 	</div>
 	<hr />

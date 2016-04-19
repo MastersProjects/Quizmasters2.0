@@ -19,6 +19,9 @@ include_once 'database/Database.php';
 					src="img/title_small.png">
 			</div>
 		</div>
+		<div class="col-md-12">
+			<img src="img/ad2.png" alt="Werbung" class="img-responsive center-block">
+		</div>
 		<div class="row">
 			<form action="result.php" method="post">
 			<?php

@@ -35,7 +35,7 @@ include_once 'database/Database.php';
 				<h2 class="page-header">Unser Team</h2>
 			</div>
 			<div class="col-lg-4 col-sm-6 text-center">
-				<img class="img-circle img-responsive img-center"
+				<img class="img-circle img-responsive center-block"
 					src="img/team/luca.png" alt="luca">
 				<h3>
 					Luca Marti <br><small>Zurich Airport</small>
@@ -44,7 +44,7 @@ include_once 'database/Database.php';
 					great spot for social links! (Er isch en pisser hhahah)</p>
 			</div>
 			<div class="col-lg-4 col-sm-6 text-center">
-				<img class="img-circle img-responsive img-center"
+				<img class="img-circle img-responsive center-block"
 					src="img/team/phong.png" alt="phong">
 				<h3>
 					Chiramet Phong Penglerd <br><small>Raiffeisen Schweiz</small>
@@ -53,7 +53,7 @@ include_once 'database/Database.php';
 					great spot for social links! Er isch en thai</p>
 			</div>
 			<div class="col-lg-4 col-sm-6 text-center">
-				<img class="img-circle img-responsive img-center"
+				<img class="img-circle img-responsive center-block"
 					src="img/team/elia.png" alt="elia">
 				<h3>
 					Elia Perenzin <br><small>Hewlett-Packard Enterprise</small>
