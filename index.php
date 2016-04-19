@@ -44,7 +44,7 @@ include_once 'database/Database.php';
 			<a href = <?php echo "quiz.php?id=" . $categories[$rand1]->__get('categoryID');?>>
 				<div class="col-xs-6 col-sm-3">
 					<img class="img-responsive" alt="Image Category"
-						src="<?php echo $categories[$rand1]->__get('img_path');?>">
+						src="<?php echo $categories[$rand1]->__get('img_path') . "large.png";?>">
 				</div>
 				<div class="col-xs-6 col-sm-3">
 					<h3>
@@ -57,7 +57,7 @@ include_once 'database/Database.php';
 				<div class="clearfix visible-xs"></div>
 				<div class="col-xs-6 col-sm-3">
 					<img class="img-responsive" alt="Image Category"
-						src="<?php echo $categories[$rand2]->__get('img_path');?>">
+						src="<?php echo $categories[$rand2]->__get('img_path') . "large.png";?>">
 				</div>
 			</a>
 			<a href = <?php echo "quiz.php?id=" . $categories[$rand2]->__get('categoryID');?>>

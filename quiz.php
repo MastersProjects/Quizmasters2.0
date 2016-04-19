@@ -16,7 +16,8 @@ include_once 'database/Database.php';
 		<div class="col-md-12">
 			<div class="row">
 				<img class="img-responsive img-width" alt="Test"
-					src="img/title_small.png">
+					src="<?php //Weiss nicht ob id gut ist
+					 echo $categories[$_GET ['id'] - 1]->__get('img_path') . "small.png";?>">
 			</div>
 		</div>
 		<div class="col-md-12">
