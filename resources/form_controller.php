@@ -41,7 +41,8 @@ if ($_POST) {
 			echo '<script type="text/javascript">swal("Erfolgreich!", "Deine Daten wurden angepasst!", "success");</script>';
 		}
 	}
-	if (isset ( $_POST ['password1Update'] ) && (isset ( $_POST ['password2Update'] ))) {
+	
+	if (isset ( $_POST ['passwordOneUpdate'] ) && (isset ( $_POST ['passwordTwoUpdate'] ))) {
 		Database::getInstance ()->changePwd ( $_POST ['password1Update'] );
 		echo '<script type="text/javascript">swal("Erfolgreich!", "Dein Passwort wurde erfolgreich geändert!", "success");</script>';
 	}

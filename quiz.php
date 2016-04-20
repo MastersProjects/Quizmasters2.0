@@ -28,7 +28,7 @@ include_once 'database/Database.php';
 			<?php
 
 				$quiz = Database::getInstance ()->createQuiz ( $_GET ['id'], $categories );
-				$lastId = Database::getInstance ()->getLastId();
+// 				$lastId = Database::getInstance ()->getLastId();
 				$_SESSION['quiz'] = serialize($quiz);
 				if (!(isset($_SESSION['login'])) or ($_SESSION['login'] == false)){
 					?>?>

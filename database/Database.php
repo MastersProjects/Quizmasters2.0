@@ -19,8 +19,10 @@ require_once '/../model/AnsweredQuestion.php';
  */
 class Database {
 	private $connection;
-	private $connectionInfo = array();
-	private $serverName;
+	private $hostname;
+	private $user;
+	private $password;
+	private $database;
 	private static $instance = null;
 	private $TABLE_ANSWER;
 	private $TABLE_CATEGORY;
@@ -50,21 +52,23 @@ class Database {
 	 * @param $serverName serverName on which the DB is located
 	 * @param $connectionInfo connectionInfo array with spec for the connection
 	 */
-	public function setConnectionInfo($serverName, $connectionInfo) {
-		$this->serverName = $serverName;
-		$this->connectionInfo = $connectionInfo;
+	public function setConnectionInfo($hostname, $user, $password, $database) {
+		$this->hostname = $hostname;
+		$this->user = $user;
+		$this->password = $password;
+		$this->database = $database;
 	}
 	
 	/**
 	 * Open conenction for query
 	 * @return returns the connection for DB
 	 */
-	public function openConn(){
-		$this->connection = sqlsrv_connect( $this->serverName, $this->connectionInfo);
+	public function openConn(){		
+		$this->connection = mysqli_connect($this->hostname,$this->user,$this->password,$this->database);
 		
-		if( !($this->connection) ) {
-			echo "Connection could not be established.<br />";
-			die( print_r( sqlsrv_errors(), true));
+		// Check connection
+		if (mysqli_connect_errno()){
+			echo "Connection could not be established" . mysqli_connect_error();
 		}
 		return $this->connection;
 	}
@@ -82,10 +86,10 @@ class Database {
 		return $data;
 	}
 	
-	//Close connection afer query was executed
-	public function closeConn(){
-		sqlsrv_close($this->connection);
-	}
+// 	//Close connection afer query was executed
+// 	public function closeConn(){
+// 		mysqli_close($this->connection);
+// 	}
 	
 	/**
 	 * Login function
@@ -95,18 +99,16 @@ class Database {
 	 */
 	public function login($username, $password) {
 		$result = $this->TABLE_USER->getUser($this->test_input($username));
- 		$result = sqlsrv_fetch_array ($result);
- 		
+ 		$result = mysqli_fetch_array ($result);
 		if($result['Password'] == md5($password)){
 			$user = new User($result['Username'], $result['Firstname'], $result['Lastname'], $result['ID_User'], $result['Email'], $result['Profile_Img']);
-			$this->closeConn();
-			
+						
 			$user->__SET('points', $this->getPointsUser($user->__GET('userID')));
 			$_SESSION['login'] = true;
 			$_SESSION['user'] = serialize($user);
 			return true;
 		} else {
-			$this->closeConn();
+			
 			return false;
 		}
 	}
@@ -120,11 +122,10 @@ class Database {
 	public function checkUser($username) {
 		$result = $this->TABLE_USER->getUser($this->test_input($username));
 		
-		if(sqlsrv_has_rows($result) == true){
-			$this->closeConn();
+		if(mysqli_num_rows($result)>0){
 			return true;
 		} else {
-			$this->closeConn();
+			
 			return false;
 		}
 	}
@@ -135,9 +136,9 @@ class Database {
 	 */
 	public function getUser($username) {
 		$result = $this->TABLE_USER->getUser($this->test_input($username));
-		$result = sqlsrv_fetch_array ($result);
+		$result = mysqli_fetch_array ($result);
 		$user = new User($result['Username'], $result['Firstname'], $result['Lastname'], $result['ID_User'], $result['Email'], $result['Profile_Img']);
-		$this->closeConn();
+		
 		$user->__SET('points', $this->getPointsUser($user->__GET('userID')));
 		return $user;
 	}
@@ -155,7 +156,7 @@ class Database {
 	public function registration($username, $firstname, $lastname, $email, $password) {
 		if(!($this->checkUser($username))){
 			$res = $this->TABLE_USER->registration($this->test_input($username), $this->test_input($firstname), $this->test_input($lastname), $this->test_input($email), md5($this->test_input($password)));
-			$this->closeConn();
+			
 			$this->login($username, $password);
 			return true;
 		} else {
@@ -169,7 +170,6 @@ class Database {
 	 */
 	public function changePwd($password){
 		$this->TABLE_USER-> changePwd(md5($this->test_input($password)), unserialize($_SESSION['user'])->__GET('username'));
-		$this->closeConn();
 	}
 	
 	/**
@@ -190,7 +190,7 @@ class Database {
 		}
 		if(!($duplicate)){
 			$res = $this->TABLE_USER->userUpdate($user->__GET('username'), $this->test_input($firstname), $this->test_input($lastname), $this->test_input($email), $this->test_input($username));
-			$this->closeConn();
+			
 			$user->__SET('username', $this->test_input($username));
 			$user->__SET('firstname', $this->test_input($firstname));
 			$user->__SET('lastname', $this->test_input($lastname));
@@ -208,14 +208,14 @@ class Database {
 	 */
 	public function deleteUser($username){
 		$this->TABLE_USER->deleteUser($username);
-		$this->closeConn();
+		
 	}
 	
 	public function getPointsUser($userId){
 		$result = $this->TABLE_SOLVED_QUIZ->getPointsUser($userId);
-		$result = sqlsrv_fetch_array($result);
+		$result = mysqli_fetch_array($result);
 		$points = $result['points'];
-		$this->closeConn();
+		
 		return $points;
 	}
 	
@@ -229,7 +229,7 @@ class Database {
 		//Categories array with quiz obj
 		$categories = array();
 		
-		while ($category = sqlsrv_fetch_array($result)){
+		while ($category = mysqli_fetch_array($result)){
 			$quiz = new Quiz();
 			$quiz->__set('category', $category['Category']);
 			$quiz->__set('categoryID', $category['ID_Category']);
@@ -237,7 +237,7 @@ class Database {
 			$quiz->__set('img_path', $category['Img_Path']);
 			array_push($categories, $quiz);
 		}
-		$this->closeConn();
+		
 		return $categories;
 	}
 	
@@ -262,12 +262,10 @@ class Database {
 			}
 		}
 		
-		$this->closeConn();
-
 		foreach ($quiz->__get('questions') as $question){
 			$result_answer = $this->TABLE_ANSWER->getAnswers($question->__get('questionID'));
 			$answers = array();
-			while($answer_result = sqlsrv_fetch_array($result_answer)){
+			while($answer_result = mysqli_fetch_array($result_answer)){
 				$answer = new Answer();
 				$answer->__set('answerID', $answer_result['ID_Answer']);
 				$answer->__set('answer', $answer_result['Answer']);
@@ -276,8 +274,6 @@ class Database {
 			}
 			$question->__set('answers', $answers);
 		}
-	
-		$this->closeConn();
 		return $quiz;
 	}
 	
@@ -287,7 +283,7 @@ class Database {
 	 */
 	public function parseQuiz($result_question, $questions){
 		$newquestions = $questions;
-		while ($question_result = sqlsrv_fetch_array($result_question)){
+		while ($question_result = mysqli_fetch_array($result_question)){
 			$question = new Question();
 			$question->__set("questionID", $question_result['ID_Question']);
 			$question->__set("question", $question_result['Question']);
@@ -299,36 +295,15 @@ class Database {
 	}
 	
 	public function quizSolved($points, $userID, $gameMode, $categoryID, $answeredQuestions){
-		$this->TABLE_SOLVED_QUIZ->quizSolved($points, $userID, $gameMode, $categoryID);
-		$solved_quiz_id = $this->getLastId();	
-		$this->closeConn();
+		$solved_quiz_id = $this->TABLE_SOLVED_QUIZ->quizSolved($points, $userID, $gameMode, $categoryID);
+		//$solved_quiz_id = $this->getLastId();	
+		
 		$iterator = 0;
 		while(count($answeredQuestions)>$iterator){
 			$answeredQuestion = $answeredQuestions[$iterator];
-			$this->TABLE_SOLVED_QUIZ_QUESTION->questionSolved($answeredQuestion->__get('answeredRight'), $solved_quiz_id, $answeredQuestion->__get('questionID'));
-			$this->closeConn();
+			$result = $this->TABLE_SOLVED_QUIZ_QUESTION->questionSolved($answeredQuestion->__get('answeredRight'), $solved_quiz_id, $answeredQuestion->__get('questionID'));
 			$iterator = $iterator +1;
 		}
-	}
-
-	
-	/**
-	 * Get the last ID created in current Connection
-	 * USE BEFORE CLOSING CONNECTION!!
-	 */
-	public function getLastId(){
-		$result = null;
-		if($this->connection != null){
-			$query = "SELECT @@IDENTITY";			
-			$stmt = sqlsrv_query ($this->connection, $query);
-			$result = sqlsrv_fetch_array ($stmt);
-		}
-		return $result[''];
-	}
-	
-	//Getter
-	public function getServerName(){
-		return $this->serverName;
 	}
 	
 	/**
@@ -338,7 +313,7 @@ class Database {
 		$result = $this->TABLE_USER->getRanking();
 		$rankingList = array();	
 		$iterator = 1;	
-		while ($rs = sqlsrv_fetch_array($result)){
+		while ($rs = mysqli_fetch_array($result)){
 			$ranking = array();
 			array_push($ranking, $iterator);
 			array_push($ranking, $rs['Username']);
@@ -348,7 +323,7 @@ class Database {
 			$iterator = $iterator + 1;
 			
 		}
-		$this->closeConn();
+		
 		return $rankingList;
 	}
 	
@@ -359,11 +334,11 @@ class Database {
 	 */
 	public function getRightFalse($userID){
 		$result = $this->TABLE_SOLVED_QUIZ_QUESTION->getFalseRight($userID);
-		$result = sqlsrv_fetch_array($result);
+		$result = mysqli_fetch_array($result);
 		$rightFalse = array();
-		array_push($rightFalse, $result['true']);
-		array_push($rightFalse, $result['false']);
-		$this->closeConn();
+		array_push($rightFalse, $result['t']);
+		array_push($rightFalse, $result['f']);
+		
 		return $rightFalse;
 	}
 	
@@ -371,14 +346,19 @@ class Database {
 		$result = $this->TABLE_SOLVED_QUIZ->getPointsQuiz($userID);
 		$pointsQuiz = array();
 		$iterator = 1;
-		while ($rs = sqlsrv_fetch_array($result)){
+		while ($rs = mysqli_fetch_array($result)){
 			$quiz = array();
 			array_push($quiz, $iterator);
 			array_push($quiz, $rs['Points']);
 			array_push($pointsQuiz, $quiz);	
 			$iterator = $iterator + 1;
 		}
-		$this->closeConn();
+		
 		return $pointsQuiz;
+	}
+	
+	//Getter
+	public function getConnection() {
+		return $this->connection;
 	}
 }

@@ -14,11 +14,12 @@ class Table_CATEGORY {
 	 * @return sql stmt
 	 */
 	public function getAllCategories() {
-		$query = "SELECT * FROM [QUIZMASTERS].[dbo].[CATEGORY] WHERE [Active] = '1'";
+		$query = "SELECT * FROM CATEGORY WHERE Active = '1'";
 		$connection = Database::getInstance ()->openConn ();		
-		$stmt = sqlsrv_query ( $connection, $query);
 		
-		return($stmt);
-	}
-	
+		$connection = Database::getInstance ()->openConn();
+		$stmt = $connection->query ( $query );
+		
+		return $stmt;
+	}	
 }

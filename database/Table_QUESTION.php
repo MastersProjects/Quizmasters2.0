@@ -17,18 +17,16 @@ class Table_QUESTION {
  * @return sql stmt 
  */
 public function getQuestions($id_category, $id_difficulty, $amount) {
-	$params = array($id_category, '1', $id_difficulty);
-
-	$query = "SELECT TOP ".$amount." [ID_Question],[Question],[Points]
-				FROM [QUIZMASTERS].[dbo].[QUESTION]
-				JOIN [QUIZMASTERS].[dbo].[DIFFICULTY] 
-				ON [QUIZMASTERS].[dbo].[QUESTION].Difficulty_ID = [QUIZMASTERS].[dbo].[DIFFICULTY].ID_Difficulty
-				WHERE [Category_ID] = ? AND [Active] = ? AND [Difficulty_ID] = ?
-				ORDER BY NEWID();";
-		
+	$query = "SELECT ID_Question, Question, Points
+				FROM QUESTION
+				JOIN DIFFICULTY
+				ON QUESTION.Difficulty_ID = DIFFICULTY.ID_Difficulty
+				WHERE Category_ID = '$id_category' AND Active = '1' AND Difficulty_ID = '$id_difficulty'
+				ORDER BY RAND()
+				LIMIT $amount;";
 		$connection = Database::getInstance ()->openConn();
-		$stmt = sqlsrv_query($connection, $query, $params);
-		
+		$stmt = $connection->query ( $query );
+	
 		return($stmt);
 	}
 	

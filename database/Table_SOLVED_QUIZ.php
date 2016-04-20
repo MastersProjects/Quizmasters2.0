@@ -9,39 +9,39 @@ require_once 'Database.php';
  */
 class Table_SOLVED_QUIZ {
 	public function quizSolved($points, $userID, $gameMode, $categoryID){
-		$params = array($points, $userID, $gameMode, $categoryID);
-		$sql = "INSERT INTO [dbo].[SOLVED_QUIZ]
-		([Points]
-		,[User_ID]
-		,[Gamemode_ID]
-		,[Category_ID])
-		VALUES (?, ?, ?, ?)";
-
 		$connection = Database::getInstance ()->openConn();
-		sqlsrv_query($connection, $sql, $params);
+		$stmt = $connection->prepare("INSERT INTO SOLVED_QUIZ
+		(Points
+		,User_ID
+		,Gamemode_ID
+		,Category_ID)
+		VALUES (?, ?, ?, ?)");
 		
+		$stmt->bind_param("ssss", $points, $userID, $gameMode, $categoryID);
+		$stmt->execute();
+		return  mysqli_insert_id($connection);
 	}
 	
 	public function getPointsUser($userId){
 		$params = array($userId);
-		$sql = "SELECT SUM(points) as points
-		FROM [dbo].[SOLVED_QUIZ] 
-		WHERE [User_ID] = ?";
+		$query = "SELECT SUM(points) as points
+		FROM SOLVED_QUIZ 
+		WHERE User_ID = $userId";
 		
 		$connection = Database::getInstance ()->openConn();
-		$result = sqlsrv_query($connection, $sql, $params);
-		return $result;
+		$stmt = $connection->query ( $query );
+		return $stmt;
 	}
 	
 	public function getPointsQuiz($userID){
 		$params = array($userID);
-		$sql = "SELECT [Points]
-		FROM [dbo].[SOLVED_QUIZ]
-		WHERE [User_ID] = ?
-		ORDER BY [ID_SolvedQuiz]";
+		$sql = "SELECT Points
+		FROM SOLVED_QUIZ
+		WHERE User_ID = $userID
+		ORDER BY ID_SolvedQuiz";
 		
 		$connection = Database::getInstance ()->openConn();
-		$result = sqlsrv_query($connection, $sql, $params);
-		return $result;
+		$stmt = $connection->query ( $sql );
+		return $stmt;
 	}
 }

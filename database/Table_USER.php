@@ -14,13 +14,12 @@ class Table_USER {
 	 * @return sql stmt
 	 */
 	public function getUser($username) {
-		$query = "SELECT * FROM [QUIZMASTERS].[dbo].[USER] WHERE [username] = ? AND [active] = '1'";
+		$query = "SELECT * FROM USER 
+		WHERE username = '$username' AND active = '1'";
  		
 		$connection = Database::getInstance ()->openConn();
- 		$params = array($username);
-		$stmt = sqlsrv_query ( $connection, $query, $params);
-		
-		return($stmt);
+		$stmt = $connection->query ( $query );
+		return $stmt;
 	}
 	
 	/**
@@ -32,17 +31,16 @@ class Table_USER {
 	 * @param $password
 	 */
 	public function registration($username, $firstname, $lastname, $email, $password) {
-		$params = array($username, $firstname, $lastname, $password, $email, 1);
-		
-		$sql = "INSERT INTO [QUIZMASTERS].[dbo].[USER] ([Username]
-      	,[Firstname]
-      	,[Lastname]
-      	,[Password]
-      	,[Email]
-      	,[Active]) VALUES (?, ?, ?, ?, ?, ?)";
-		
 		$connection = Database::getInstance ()->openConn();
-		sqlsrv_query( $connection, $sql, $params);
+		$stmt = $connection->prepare("INSERT INTO USER (Username
+      	,Firstname
+      	,Lastname
+      	,Password
+      	,Email
+      	,Active) VALUES (?, ?, ?, ?, ?, 1)");
+		
+		$stmt->bind_param('sssss', $username, $firstname, $lastname, $password, $email);
+		$stmt->execute();
 	}
 	
 	/**
@@ -54,17 +52,16 @@ class Table_USER {
 	 * @param $newUsername
 	 */
 	public function userUpdate($username, $firstname, $lastname, $email, $newUsername) {
-		$params = array($newUsername, $firstname, $lastname, $email, $username);
-		
-		$sql = "UPDATE [dbo].[USER]
-  			SET [Username] = ?
-      		,[Firstname] = ?
-      		,[Lastname] = ?
-      		,[Email] = ?
- 			WHERE [Username] = ? and [Active] = '1'";
-	
 		$connection = Database::getInstance ()->openConn();
-		$result = sqlsrv_query( $connection, $sql, $params);
+		$stmt = $connection->prepare("UPDATE USER
+  			SET Username = ?
+      		,Firstname = ?
+      		,Lastname = ?
+      		,Email = ?
+ 			WHERE Username = ? and Active = '1'");
+	
+		$stmt->bind_param("sssss", $newUsername, $firstname, $lastname, $email, $username);
+		$stmt->execute();
 	}
 	
 	/**
@@ -73,40 +70,40 @@ class Table_USER {
 	 * @param $username
 	 */
 	public function changePwd($password, $username){
-		$params = array($password, $username);
-		$sql = "UPDATE [dbo].[USER]
-  		SET [Password] = ?
- 		WHERE [Username] = ? and [Active] = '1'";
-		
 		$connection = Database::getInstance ()->openConn();
-		$stmt = sqlsrv_query ( $connection, $sql, $params);
+		$stmt = $connection->prepare("UPDATE USER
+  		SET Password = ?
+ 		WHERE Username = ? and Active = '1'");
+		
+		$stmt->bind_param("ss", $password, $username);
+		$stmt->execute();
 	}
-	
+
 	/**
 	 * delete User from database
 	 * @param $username
 	 */
 	public function deleteUser($username){
-		$sql = "UPDATE [dbo].[USER]
-  		SET [Active] = '0'
- 		WHERE [Username] = ?";
+		$query = "UPDATE USER
+  		SET Active = '0'
+ 		WHERE Username = '$username'";
 		
 		$connection = Database::getInstance ()->openConn();
-		$params = array($username);
-		$stmt = sqlsrv_query ( $connection, $sql, $params);
+		$stmt = $connection->query ( $query );
 	}
 	
 	public function getRanking(){
-		$query = "SELECT TOP 10 
-		[dbo].[USER].[Username], sum([sq].[Points]) as Points
-		FROM [dbo].[USER]
-		JOIN [dbo].[SOLVED_QUIZ] as sq 
-		ON [USER].[ID_User] = sq.user_id
-		WHERE [dbo].[USER].[active] = '1'
-		GROUP BY [dbo].[USER].[ID_User], [dbo].[USER].[Username]
-		ORDER BY Points DESC";
+		$query = "SELECT Username, sum(Points) as Points
+		FROM USER
+		JOIN SOLVED_QUIZ as sq 
+		ON ID_User = sq.user_id
+		WHERE USER.active = '1'
+		GROUP BY ID_User, Username
+		ORDER BY Points DESC
+		LIMIT 10";
+		
 		$connection = Database::getInstance ()->openConn();
-		$stmt = sqlsrv_query ( $connection, $query);		
+		$stmt = $connection->query ( $query );
 		return($stmt);
 	}
 }

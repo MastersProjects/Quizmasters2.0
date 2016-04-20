@@ -15,17 +15,14 @@ class Table_ANSWER {
  * @return sql stmt
  */
 public function getAnswers($question_id) {
-	$params = array($question_id);
-
-	$query = "SELECT TOP 1000 [ID_Answer]
-      		,[Answer]
-     		,[Correct]
-      		,[Question_ID]
-  			FROM [QUIZMASTERS].[dbo].[ANSWER]
-  			WHERE Question_ID = ?";
+	$query = "SELECT ID_Answer
+      		,Answer
+     		,Correct
+      		,Question_ID 
+      		FROM ANSWER WHERE Question_ID = $question_id";
 	
 	$connection = Database::getInstance ()->openConn();
-	$stmt = sqlsrv_query( $connection, $query, $params);
+	$stmt = $connection->query ( $query );
 	
 	return($stmt);
 	}
