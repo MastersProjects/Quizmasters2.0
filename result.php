@@ -1,6 +1,5 @@
 <?php
 session_start ();
-//TODO Check if quiz set
 if(!(isset($_SESSION['user'])) || ($_SESSION['quiz'] == null)){
 	header('location: index.php');
 }
@@ -105,6 +104,11 @@ require_once 'model/AnsweredQuestion.php';
 			</div>
 			<?php }
 			Database::getInstance()->quizSolved($points, $user->__GET('userID'), '1', $quiz->__GET('categoryID'), $answeredQuestions);
+			if($user->__GET('points') < 30){
+				if($user->__GET('points') + $points >= 30){
+					echo '<script type="text/javascript">swal("Glückwunsch!", "Du hast genügend Punkte erreicht und kannst jetzt eigene Fragen hinzufügen!", "success");</script>';
+				}
+			}
 			$user->__SET('points', $user->__GET('points') + $points);
 			$_SESSION['user'] = serialize($user);
 			$_SESSION['quiz'] = null;

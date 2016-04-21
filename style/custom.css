@@ -145,7 +145,16 @@ body {
     box-shadow: none;
     text-align: center;
 }
+
 .kv-avatar .file-input {
     display: table-cell;
     max-width: 220px;
+}
+
+.titleQuestion{
+	color: #fff;
+}
+
+.grey{
+	color: grey;
 }
