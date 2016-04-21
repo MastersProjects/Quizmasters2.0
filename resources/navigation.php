@@ -41,7 +41,9 @@
 						</li>
 						<li><a href="statistics.php">Statistik</a>
 						</li>
-						<!-- <li><a href="#">Abzeichen</a></li> -->
+						<?php if ($user->__GET('points') > 29){?>
+							<li><a href="add.php">Fragen hinzuf&uuml;gen</a></li>
+						<?php }?>
 					</ul>
 				</li>
 				<?php }?>

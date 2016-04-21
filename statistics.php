@@ -1,5 +1,8 @@
 <?php
 session_start ();
+if(!(isset($_SESSION['user']))){
+	header('location: index.php');
+}
 include_once 'database/database_infos.php';
 include_once 'database/Database.php';
 $user = unserialize($_SESSION['user']);
