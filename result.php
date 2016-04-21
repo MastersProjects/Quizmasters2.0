@@ -1,8 +1,10 @@
 <?php
 session_start ();
-if(!(isset($_SESSION['user']))){
+//TODO Check if quiz set
+if(!(isset($_SESSION['user'])) || ($_SESSION['quiz'] == null)){
 	header('location: index.php');
 }
+
 // if(isset ($_SESSION['lastResult'])){
 // 	$date = new DateTime();
 // 	if((abs($date->getTimestamp() - $_SESSION['lastResult'] )) < 90){
@@ -102,14 +104,10 @@ require_once 'model/AnsweredQuestion.php';
 				</div>
 			</div>
 			<?php }
-			if($_SESSION['solved'] == true){
-				echo '<script type="text/javascript">swal("Achtung!", "Quiz wurde schon ausgerwetet!", "error");</script>';
-				} else{
 			Database::getInstance()->quizSolved($points, $user->__GET('userID'), '1', $quiz->__GET('categoryID'), $answeredQuestions);
 			$user->__SET('points', $user->__GET('points') + $points);
 			$_SESSION['user'] = serialize($user);
-			$_SESSION['solved'] = true;
-				}
+			$_SESSION['quiz'] = null;
 			?>
 		</div>
 		<div class="col-md-12">

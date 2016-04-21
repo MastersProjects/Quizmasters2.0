@@ -1,6 +1,5 @@
 <?php
 session_start ();
-$_SESSION['solved'] = false;
 include_once 'database/database_infos.php';
 include_once 'database/Database.php';
 ?>
@@ -24,7 +23,7 @@ include_once 'database/Database.php';
 			<img src="img/ad2.png" alt="Werbung" class="img-responsive center-block">
 		</div>
 		<div class="row">
-			<form action="result.php" method="post">
+			<form action="result.php" method="post" name="quiz" >
 			<?php
 
 				$quiz = Database::getInstance ()->createQuiz ( $_GET ['id'], $categories );
