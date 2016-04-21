@@ -1,6 +1,5 @@
 <?php
 session_start();
-// TODO Check if points >= 30
 if(!(isset($_SESSION['user']))){
 	header('location: index.php');
 }
