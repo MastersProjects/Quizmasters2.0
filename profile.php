@@ -116,14 +116,14 @@ include_once 'database/Database.php';
 						</h4>
 					</div>
 					<div class="container"></div>
-					<form method="post" id="passwordChange-form"
+					<form method="POST" id="passwordChange-form"
 						action=<?php $_SERVER['PHP_SELF']?>>
 						<div class="modal-body">
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
 										<label for="inputUsername">Passwort</label> <input
-											type="password" class="form-control" id="inputPassword"
+											type="password" class="form-control" id="passwordOneUpdate"
 											name="passwordOneUpdate" placeholder="Passwort">
 									</div>
 								</div>
@@ -133,7 +133,7 @@ include_once 'database/Database.php';
 								<div class="col-md-12">
 									<div class="form-group">
 										<label for="inputPassword">Passwort best&auml;tigen</label><input
-											type="password" class="form-control" name="passwordTwo"
+											type="password" class="form-control" name="passwordTwoUpdate"
 											id="passwordTwoUpdate" placeholder="Passwort wiederholen">
 									</div>
 								</div>

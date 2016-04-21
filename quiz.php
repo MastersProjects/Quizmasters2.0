@@ -31,7 +31,7 @@ include_once 'database/Database.php';
 // 				$lastId = Database::getInstance ()->getLastId();
 				$_SESSION['quiz'] = serialize($quiz);
 				if (!(isset($_SESSION['login'])) or ($_SESSION['login'] == false)){
-					?>?>
+					?>
 				<div class="col-md-12">
 				<div class="alert alert-danger" role="alert">
 				<strong>Achtung!</strong> Quiz kann nicht ausgewertet werden wenn du

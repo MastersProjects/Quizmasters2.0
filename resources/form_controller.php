@@ -27,7 +27,7 @@ if ($_POST) {
 	// For deleting a user
 	if (isset ( $_POST ['delete'] ) && strtolower ( $_POST ['delete'] ) == 'ja') {
 		Database::getInstance ()->deleteUser ( unserialize ( $_SESSION ['user'] )->__GET ( 'username' ) );
-		header ( 'location: resources/logout.php' );
+		header ( 'location: resources/logout.php' );		
 	}
 
 	// For updating user information
@@ -41,10 +41,9 @@ if ($_POST) {
 			echo '<script type="text/javascript">swal("Erfolgreich!", "Deine Daten wurden angepasst!", "success");</script>';
 		}
 	}
-	
 	if (isset ( $_POST ['passwordOneUpdate'] ) && (isset ( $_POST ['passwordTwoUpdate'] ))) {
-		Database::getInstance ()->changePwd ( $_POST ['password1Update'] );
-		echo '<script type="text/javascript">swal("Erfolgreich!", "Dein Passwort wurde erfolgreich geändert!", "success");</script>';
+		Database::getInstance ()->changePwd ( $_POST ['passwordOneUpdate'] );
+		echo '<script type="text/javascript">swal("Erfolgreich!", "Dein Passwort wurde erfolgreich ge&auml;ndert!", "success");</script>';
 	}
 	
 	if (isset ( $_POST ['search'] )) {
