@@ -32,7 +32,7 @@ public function getQuestions($id_category, $id_difficulty, $amount) {
 	
 	public function getAllQuestions(){
 		$query = "Select count(*) as count
-		from QUESTION";
+		from QUESTION WHERE active = '1'";
 	
 		$connection = Database::getInstance ()->openConn();
 		$stmt = $connection->query ( $query );
