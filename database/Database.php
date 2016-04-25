@@ -357,6 +357,34 @@ class Database {
 		return $pointsQuiz;
 	}
 	
+	public function getAllQuestions(){
+		$result = $this->TABLE_QUESTION->getAllQuestions();
+		$result = mysqli_fetch_array($result);
+		$countQuestions = $result['count'];
+		return $countQuestions;
+	}
+	
+	public function getAnsweredQuestions($userID){
+		$result = $this->TABLE_SOLVED_QUIZ_QUESTION->getAnsweredQuestions($userID);
+		$count =  mysqli_num_rows($result);
+
+		$countQuestions = $this->getAllQuestions();
+	
+		$return = 100 / $countQuestions * $count;
+		return $return;
+	}
+	
+	public function getAnsweredRightQuestions($userID){
+		$result = $this->TABLE_SOLVED_QUIZ_QUESTION->getAnsweredRightQuestions($userID);
+		$count =  mysqli_num_rows($result);
+	
+		$countQuestions = $this->getAllQuestions();
+	
+		$return = 100 / $countQuestions * $count;
+		return $return;
+	}
+	
+
 	//Getter
 	public function getConnection() {
 		return $this->connection;

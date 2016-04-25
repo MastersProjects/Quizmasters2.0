@@ -30,4 +30,14 @@ public function getQuestions($id_category, $id_difficulty, $amount) {
 		return($stmt);
 	}
 	
+	public function getAllQuestions(){
+		$query = "Select count(*) as count
+		from QUESTION";
+	
+		$connection = Database::getInstance ()->openConn();
+		$stmt = $connection->query ( $query );
+	
+		return($stmt);
+	}
+	
 }

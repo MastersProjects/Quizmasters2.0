@@ -20,13 +20,40 @@ class Table_SOLVED_QUIZ_QUESTION {
 		$stmt->execute();
 	}
 	
-	
 	public function getFalseRight($userID){
 		$sql = "SELECT count(Answered_right = 1) as t, count(Answered_right = 0 or null) as f
 		FROM SOLVED_QUIZ as sq
 		JOIN SOLVED_QUIZ_QUESTION as sqq ON ID_SolvedQuiz = SolvedQuiz_ID
 		WHERE sq.User_ID = $userID
 	  	GROUP BY sq.User_ID";
+	
+		$connection = Database::getInstance ()->openConn();
+		$stmt = $connection->query ( $sql );
+		return $stmt;
+	}
+	
+	public function getAnsweredQuestions($userID){
+		//TODO count only question active
+		$sql = "SELECT DISTINCT(sqq.Question_ID)
+		FROM SOLVED_QUIZ as sq
+		JOIN SOLVED_QUIZ_QUESTION as sqq ON ID_SolvedQuiz = SolvedQuiz_ID
+		WHERE User_ID = $userID
+		GROUP BY sq.User_ID, sqq.Question_ID
+		";
+		
+		$connection = Database::getInstance ()->openConn();
+		$stmt = $connection->query ( $sql );
+		return $stmt;
+	}
+	
+	public function getAnsweredRightQuestions($userID){
+		//TODO count only question active
+		$sql = "SELECT DISTINCT(sqq.Question_ID)
+		FROM SOLVED_QUIZ as sq
+		JOIN SOLVED_QUIZ_QUESTION as sqq ON ID_SolvedQuiz = SolvedQuiz_ID
+		WHERE User_ID = $userID and Answered_right = '1'
+		GROUP BY sq.User_ID, sqq.Question_ID
+		";
 	
 		$connection = Database::getInstance ()->openConn();
 		$stmt = $connection->query ( $sql );

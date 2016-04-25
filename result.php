@@ -1,6 +1,6 @@
 <?php
 session_start ();
-if(!(isset($_SESSION['user'])) || ($_SESSION['quiz'] == null)){
+if(!(isset($_SESSION['user'])) || (isset($_SESSION['quiz'])) || ($_SESSION['quiz'] == null)){
 	header('location: index.php');
 }
 
