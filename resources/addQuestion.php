@@ -4,7 +4,11 @@ require_once '/../model/Quiz.php';
 require_once '/../model/Question.php';
 require_once '/../model/Answer.php';
 
-var_dump($_POST);
+// var_dump($_POST);
+$questionCounter = 1;
+foreach ($_POST as $key => $val) {
+ print "$key = $val\n";
+}
 
 // 	$answer1 = new Answer();
 // 	$answer2 = new Answer();
