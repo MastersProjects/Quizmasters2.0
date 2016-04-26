@@ -33,7 +33,6 @@ class Table_SOLVED_QUIZ_QUESTION {
 	}
 	
 	public function getAnsweredQuestions($userID){
-		//TODO count only question active
 		$sql = "SELECT DISTINCT(sqq.Question_ID)
 		FROM SOLVED_QUIZ as sq
 		JOIN SOLVED_QUIZ_QUESTION as sqq ON ID_SolvedQuiz = SolvedQuiz_ID
@@ -47,7 +46,6 @@ class Table_SOLVED_QUIZ_QUESTION {
 	}
 	
 	public function getAnsweredRightQuestions($userID){
-		//TODO count only question active
 		$sql = "SELECT DISTINCT(sqq.Question_ID)
 		FROM SOLVED_QUIZ as sq
 		JOIN SOLVED_QUIZ_QUESTION as sqq ON ID_SolvedQuiz = SolvedQuiz_ID
