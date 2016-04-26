@@ -1,6 +1,15 @@
-$("#AddQuestion").click(function() {
-	console.log("j");
-	$("#questions").append($(".addQuestion").html());
+//1 is already in code. 
+var counter = 2;
+$("#AddQuestionBtn").click(function() {
+	$tmc = $("#1").clone().attr('id', counter).show();
+	$(".question", $tmc).attr('name', 'question' + counter);
+	$("#answer1", $tmc).attr('name', 'answer' + counter + "-1");
+	$("#answer2", $tmc).attr('name', 'answer' + counter + "-2");
+	$("#answer3", $tmc).attr('name', 'answer' + counter + "-3");
+	$("#answer4", $tmc).attr('name', 'answer' + counter + "-4");
+	$(".optionRight", $tmc).attr('name', 'option' + counter);
+	$tmc.appendTo("#questions");
+	counter++;
 });
 
 //$(function() {
