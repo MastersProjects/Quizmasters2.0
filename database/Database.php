@@ -22,6 +22,7 @@ class Database {
 	private $hostname;
 	private $user;
 	private $password;
+	private $port;
 	private $database;
 	private static $instance = null;
 	private $TABLE_ANSWER;
@@ -52,11 +53,12 @@ class Database {
 	 * @param $serverName serverName on which the DB is located
 	 * @param $connectionInfo connectionInfo array with spec for the connection
 	 */
-	public function setConnectionInfo($hostname, $user, $password, $database) {
+	public function setConnectionInfo($hostname, $user, $password, $database, $port) {
 		$this->hostname = $hostname;
 		$this->user = $user;
 		$this->password = $password;
 		$this->database = $database;
+		$this->port = $port;
 	}
 	
 	/**
@@ -64,7 +66,7 @@ class Database {
 	 * @return returns the connection for DB
 	 */
 	public function openConn(){		
-		$this->connection = mysqli_connect($this->hostname,$this->user,$this->password,$this->database);
+		$this->connection = new mysqli($this->hostname,$this->user,$this->password,$this->database, $this->port);
 		
 		// Check connection
 		if (mysqli_connect_errno()){
