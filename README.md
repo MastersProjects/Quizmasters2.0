@@ -85,7 +85,7 @@ HTML includes wie zum Beispiel Navigation, Footer, …
 Alle Style Files, in unserem Fall nur das cutsom.css File von Bootstrap. 
 
 # Datenbank
-
+|                                       | |
 | ------------------------------------- | :-----: |
 | **DBMS** | Microsoft SQL Server 2012 |
 | **Name** | QUIZMASTERS |
